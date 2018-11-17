@@ -1,6 +1,8 @@
 var colorArray
 var colorLoopCount = 0
 
+//Check randomColors() produces an array of the length of the variable inputted
+//with random numbers between 0 and 3
 describe("Simon Game", function() {
     describe("Number generator", function() {
         colorArray = randomColor(3)
