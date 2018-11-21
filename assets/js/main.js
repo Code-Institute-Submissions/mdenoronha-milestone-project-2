@@ -64,14 +64,17 @@ function checkColor(e) {
         //If color is correct
         if (e.target.id == colors[CheckedColorNumber]) {
             console.log("Win")
+            //Test - did this run?
             newRoundInit()
         }
         //If color is wrong
         else {
             console.log("Loss")
+            //Test - did this run?
             deactivateColors()
             clearTimeout(timeOut)
             console.log(colors)
+            //Test - did this run?
             resetVariables()
         }
     }
@@ -80,15 +83,19 @@ function checkColor(e) {
         //If color is correct
         if (e.target.id == colors[CheckedColorNumber]) {
             console.log("Win")
+            //Test - did this run?
             clearTimeout(timeOut)
+            //Test - did this run?
             timer()
             CheckedColorNumber++
             console.log(colors)
         }
         //If color is wrong
         else {
+            //Test - did this run?
             deactivateColors()
             console.log("Loss")
+            //Test - did this run?
             clearTimeout(timeOut)
             console.log(colors)
         }
