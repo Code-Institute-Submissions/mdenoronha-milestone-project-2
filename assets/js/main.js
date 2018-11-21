@@ -5,6 +5,16 @@ var timeOut;
 var countdownTimeLeft;
 var CheckedColorNumber = 0
 
+//Make colors active and clickable
+function activateColors() {
+    $("div").addClass("active")
+}
+
+//Make colors inactive and not clickable
+function deactivateColors() {
+    $("div").removeClass("active")
+}
+
 //Push a random color to colors a certain number of times
 function randomColor(numOfTimes) {
     for (i = 0; i < numOfTimes; i++) {
@@ -101,4 +111,20 @@ function checkColor(e) {
         }
     }
 }
+
+//Start next round
+function newRoundInit() {
+    deactivateColors()
+    colorHighlightLength = (colors.length + 1) * 3000
+    colorHighlightCount = 0
+    turn++
+    colorNumber = 0
+    clearTimeout(timeOut)
+    randomColor(1)
+    highlightColors()
+    setTimeout(timer, colorHighlightLength);
+    setTimeout(activateColors, colorHighlightLength);
+    console.log(colors)
+}
+
 
