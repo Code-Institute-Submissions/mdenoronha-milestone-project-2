@@ -31,7 +31,7 @@ var colors
 var e = { target: { id: "" } };
 
 describe("Appropriate functions should run based on user's guess", function() {
-    describe("User guesses last color in series correctly", function() {
+    describe("User guessed last color in series correctly", function() {
         it("newRoundInit should run", function() {
 
             colors = [0, 1, 2, 3]
@@ -46,7 +46,7 @@ describe("Appropriate functions should run based on user's guess", function() {
         })
     })
 
-    describe("User guess last color in series incorrectly", function() {
+    describe("User guessed last color in series incorrectly", function() {
         it("deactivateColors and resetVariables should run", function() {
 
             colors = [0, 1, 2, 3]
@@ -55,9 +55,34 @@ describe("Appropriate functions should run based on user's guess", function() {
             //User has selected the incorrect color
             e.target.id = "1"
 
+            spyOn(window, 'deactivateColors')
+            spyOn(window, 'resetVariables')
             spyOn(window, 'newRoundInit')
             checkColor(e)
-            expect(window.newRoundInit).toHaveBeenCalled()
+            expect(window.deactivateColors).toHaveBeenCalled()
+            expect(window.resetVariables).toHaveBeenCalled()
+            
+            expect(window.newRoundInit).not.toHaveBeenCalled()
+        
         })
     })
+    //NEEDS FIXING
+     describe("User guessed color (exc. last) in series correctly", function() {
+        it("timer should run", function() {
+
+            colors = [0, 1, 2, 3]
+            //User is not on the last colour to be checked before a new one is added
+            CheckedColorNumber = 1
+            //User has selected the correct color
+            e.target.id = "1"
+
+            spyOn(window, 'timer')
+            checkColor(e)
+            expect(window.timer).toHaveBeenCalled()
+            
+            expect(window.newRoundInit).not.toHaveBeenCalled()
+        
+        })
+    })
+    
 })

@@ -3,7 +3,9 @@ var colorHighlightCount = 0;
 var colorHighlightLength = 0;
 var timeOut;
 var countdownTimeLeft;
-var CheckedColorNumber = 0
+var CheckedColorNumber = 0;
+var turn = 0;
+var colorNumber = 0;
 
 //Make colors active and clickable
 function activateColors() {
@@ -12,7 +14,16 @@ function activateColors() {
 
 //Make colors inactive and not clickable
 function deactivateColors() {
-    $("div").removeClass("active")
+    // $("div").removeClass("active")
+}
+
+//Reset all variables
+function resetVariables() {
+    turn = 0
+    colorNumber = 0
+    colorHighlightCount = 0
+    colorHighlightLength = 0
+    colors = []
 }
 
 //Push a random color to colors a certain number of times
