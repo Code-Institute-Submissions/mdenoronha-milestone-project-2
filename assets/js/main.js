@@ -7,15 +7,25 @@ var CheckedColorNumber = 0;
 var turn = 0;
 var colorNumber = 0;
 
-//Make colors active and clickable
-function activateColors() {
-    $("div").addClass("active")
+var countdown
+var activebuttons = []
+
+//Push a random color to colors a certain number of times
+function randomColor(numOfTimes) {
+    for (i = 0; i < numOfTimes; i++) {
+        var newColor = Math.floor(Math.random() * 4)
+        colors.push(newColor)
+        console.log(colors)
+    }
+    return colors
 }
 
-//Make colors inactive and not clickable
-function deactivateColors() {
-    // $("div").removeClass("active")
-}
+//On key press - check color
+$(document).on('click', '.active', function(e) {
+    checkColor(e)
+    console.log(e)
+});
+
 
 //Reset all variables
 function resetVariables() {
@@ -26,15 +36,24 @@ function resetVariables() {
     colors = []
 }
 
-//Push a random color to colors a certain number of times
-function randomColor(numOfTimes) {
-    for (i = 0; i < numOfTimes; i++) {
-        var newColor = Math.floor(Math.random() * 4);
-        colors.push(newColor);
-    }
-    return colors
+//Timer as text
+function countdownReset() {
+    countdownTimeLeft = 3;
+    countdownAsText();
 }
 
+function countdownAsText() {
+    if (countdownTimeLeft > 0) {
+        countdownTimeLeft--;
+        console.log(countdownTimeLeft + 1)
+        //Need to fix this
+        $(".countdown_text").html(`<p>${countdownTimeLeft + 1}</p>`);
+
+        if (countdownTimeLeft > 0) {
+            setTimeout('countdownAsText()', 1000);
+        }
+    }
+}
 // Timer
 function timer() {
     countdownReset()
@@ -45,82 +64,61 @@ function timer() {
     }, 3000);
 }
 
-//Reset text timer
-function countdownReset() {
-    countdownTimeLeft = 3;
-    countdownAsText();
-}
-
-//Timer as text
-function countdownAsText() {
-    if (countdownTimeLeft > 0) {
-        countdownTimeLeft--;
-        console.log(countdownTimeLeft + 1)
-        $(".countdown_text").html(`<p>${countdownTimeLeft + 1}</p>`);
-
-        if (countdownTimeLeft > 0) {
-            setTimeout('countdownAsText()', 1000);
-        }
-    }
-}
-
-//Highlight colors at beginning of round
-function highlightColors() {
-    if (colorHighlightCount < colors.length - 1) {
-        setTimeout(function() {
-            $("#" + colors[colorHighlightCount]).css("border", "20px solid black")
-        }, 1000)
-        setTimeout(function() {
-            highlightColors();
-            colorHighlightCount++
-            $("div").css("border", "none")
-        }, 3000)
-    }
-}
-
 //Check if color clicked was correct
 function checkColor(e) {
     //If last color in the array
-    if (CheckedColorNumber == colors.length - 1) {
+    if (colorNumber == colors.length - 1) {
         //If color is correct
-        if (e.target.id == colors[CheckedColorNumber]) {
+        if (e.target.id == colors[colorNumber]) {
             console.log("Win")
-            //Test - did this run?
             newRoundInit()
         }
         //If color is wrong
         else {
             console.log("Loss")
-            //Test - did this run?
             deactivateColors()
+            resetVariables()
             clearTimeout(timeOut)
             console.log(colors)
-            //Test - did this run?
-            resetVariables()
         }
     }
     //If not last color in the array
     else {
         //If color is correct
-        if (e.target.id == colors[CheckedColorNumber]) {
+        if (e.target.id == colors[colorNumber]) {
             console.log("Win")
-            //Test - did this run?
             clearTimeout(timeOut)
-            //Test - did this run?
             timer()
-            CheckedColorNumber++
+            colorNumber++
             console.log(colors)
         }
         //If color is wrong
         else {
-            //Test - did this run?
             deactivateColors()
             console.log("Loss")
-            //Test - did this run?
             clearTimeout(timeOut)
             console.log(colors)
         }
     }
+}
+
+//Make colors active and clickable
+function activateColors() {
+    $("div").addClass("active")
+}
+
+//Make colors inactive and not clickable
+function deactivateColors() {
+    $("div").removeClass("active")
+}
+
+
+//Start game
+function Gameinit() {
+    randomColor(2)
+    highlightColors()
+    setTimeout(timer, 6000);
+    setTimeout(activateColors, 6000);
 }
 
 //Start next round
@@ -138,4 +136,23 @@ function newRoundInit() {
     console.log(colors)
 }
 
+//Start game button
+$(".start-game").on('click', function() {
+    resetVariables()
+    Gameinit()
+});
 
+
+//Highlight colors at beginning of round
+function highlightColors() {
+    if (colorHighlightCount < colors.length - 1) {
+        setTimeout(function() {
+            $("#" + colors[colorHighlightCount]).css("border", "20px solid black")
+        }, 1000)
+        setTimeout(function() {
+            highlightColors();
+            colorHighlightCount++
+            $("div").css("border", "none")
+        }, 3000)
+    }
+}
