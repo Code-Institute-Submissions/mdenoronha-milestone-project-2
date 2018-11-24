@@ -10,6 +10,8 @@ var colorNumber = 0;
 var countdown
 var activebuttons = []
 
+var difficulty = 2
+
 //Push a random color to colors a certain number of times
 function randomColor(numOfTimes) {
     for (i = 0; i < numOfTimes; i++) {
@@ -20,7 +22,7 @@ function randomColor(numOfTimes) {
     return colors
 }
 
-//On key press - check color
+//On key press - change mode
 $(document).on('click', '.active', function(e) {
     checkColor(e)
     console.log(e)
@@ -38,7 +40,7 @@ function resetVariables() {
 
 //Timer as text
 function countdownReset() {
-    countdownTimeLeft = 3;
+    countdownTimeLeft = 3 * difficulty;
     countdownAsText();
 }
 
@@ -61,7 +63,7 @@ function timer() {
     timeOut = setTimeout(function() {
         console.log("Timeout")
         $(".countdown_text").html("")
-    }, 3000);
+    }, 3000 * difficulty);
 }
 
 //Check if color clicked was correct
@@ -115,16 +117,25 @@ function deactivateColors() {
 
 //Start game
 function Gameinit() {
-    randomColor(2)
-    highlightColors()
-    setTimeout(timer, 6000);
-    setTimeout(activateColors, 6000);
+    if (difficulty == 1) {
+        randomColor(4)
+        setTimeout(timer, 7300);
+        setTimeout(activateColors, 7300);
+        highlightColors()
+    }
+    else {
+        randomColor(2)
+        highlightColors()
+        setTimeout(timer, 3650);
+        setTimeout(activateColors, 3650);
+    }
 }
 
 //Start next round
 function newRoundInit() {
     deactivateColors()
-    colorHighlightLength = (colors.length + 1) * 3000
+    colorHighlightLength = (colors.length + 1) * 1825
+    console.log(colorHighlightLength)
     colorHighlightCount = 0
     turn++
     colorNumber = 0
@@ -148,11 +159,22 @@ function highlightColors() {
     if (colorHighlightCount < colors.length - 1) {
         setTimeout(function() {
             $("#" + colors[colorHighlightCount]).css("border", "20px solid black")
-        }, 1000)
+        }, 300)
         setTimeout(function() {
             highlightColors();
             colorHighlightCount++
             $("div").css("border", "none")
-        }, 3000)
+        }, 1750)
     }
 }
+
+//Difficulty buttons
+$(".easy").on("click", function() {
+    difficulty = 2
+    console.log(difficulty)
+});
+
+$(".hard").on("click", function() {
+    difficulty = 1
+    console.log(difficulty)
+});
