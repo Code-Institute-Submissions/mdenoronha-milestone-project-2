@@ -7,6 +7,10 @@
         .highlight {
             background-color: black;
         }
+
+        .submit-hard-score {
+            visibility: visible;
+        }
     </style>
 </head>
 
@@ -15,15 +19,26 @@
     <div id="1" style="float: left;background-color:red;height:200px;width:200px"></div>
     <div id="2" style="float: left;background-color:green;height:200px;width:200px"></div>
     <div id="3" style="float: left;background-color:yellow;height:200px;width:200px"></div>
-    
+
     <button class="start-game">Start Game</button>
     <div class="countdown_text"></div>
-    
+
     <div class="difficulty-buttons">
         <button class="easy">Easy</button>
         <button class="hard">Hard</button>
     </div>
-    
+
+    <button class="show-scores">Easy Scores</button>
+
+    <div class="table">
+
+    </div>
+
+    <form class="submit-score">
+        <input type="text" name="hardNameSubmit">
+        <button>Submit Score</button>
+    </form>
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="assets/js/main.js"></script>
 </body>

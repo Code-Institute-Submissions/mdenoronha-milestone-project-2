@@ -4,13 +4,20 @@ var colorHighlightLength = 0;
 var timeOut;
 var countdownTimeLeft;
 var CheckedColorNumber = 0;
-var turn = 0;
+var turn = 9;
 var colorNumber = 0;
 
 var countdown
 var activebuttons = []
 
 var difficulty = 2
+
+var hardScores
+var easyScores
+
+//Load scores on load
+loadHardScores()
+loadEasyScores()
 
 //Push a random color to colors a certain number of times
 function randomColor(numOfTimes) {
@@ -36,6 +43,7 @@ function resetVariables() {
     colorHighlightCount = 0
     colorHighlightLength = 0
     colors = []
+    $(".table").html("")
 }
 
 //Timer as text
@@ -77,9 +85,9 @@ function checkColor(e) {
         }
         //If color is wrong
         else {
+            showHardScoresForm()
             console.log("Loss")
             deactivateColors()
-            resetVariables()
             clearTimeout(timeOut)
             console.log(colors)
         }
@@ -96,6 +104,7 @@ function checkColor(e) {
         }
         //If color is wrong
         else {
+            showHardScoresForm()
             deactivateColors()
             console.log("Loss")
             clearTimeout(timeOut)
@@ -117,6 +126,7 @@ function deactivateColors() {
 
 //Start game
 function Gameinit() {
+    resetVariables()
     if (difficulty == 1) {
         randomColor(4)
         setTimeout(timer, 7300);
@@ -172,9 +182,126 @@ function highlightColors() {
 $(".easy").on("click", function() {
     difficulty = 2
     console.log(difficulty)
+    $(".show-scores").html("Easy Scores")
+    $(".table").html("")
 });
 
 $(".hard").on("click", function() {
     difficulty = 1
     console.log(difficulty)
+    $(".show-scores").html("Hard Scores")
+    $(".table").html("")
+});
+
+
+//Access hard score data
+$(".show-scores").on("click", function() {
+    $(".table").html("")
+    showTable()
+});
+
+
+function loadHardScores() {
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("GET", "assets/scores/hard-scores.csv")
+    xhr.send()
+
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            hardScores = JSON.parse(this.responseText);
+            hardScores.sort(function(a, b) {
+                return b.score - a.score;
+            });
+            return hardScores
+        }
+    }
+}
+
+function loadEasyScores() {
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("GET", "assets/scores/easy-scores.csv")
+    xhr.send()
+
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            easyScores = JSON.parse(this.responseText);
+            easyScores.sort(function(a, b) {
+                return b.score - a.score;
+            });
+            return easyScores
+        }
+    }
+}
+
+function showTable() {
+    var tablerow = []
+
+    //If hard
+    if (difficulty === 1) {
+        for (var i = 0; i < hardScores.length; i++) {
+            if (i === 10) { break; }
+            console.log(hardScores[i].name)
+            tablerow.push(`<p>${hardScores[i].name}    ${hardScores[i].score}</p>`)
+        }
+    //If easy
+    } else {
+       for (var i = 0; i < easyScores.length; i++) {
+            if (i === 10) { break; }
+            console.log(easyScores[i].name)
+            tablerow.push(`<p>${easyScores[i].name}    ${easyScores[i].score}</p>`)
+        } 
+    }
+
+
+    $(".table").html(tablerow)
+}
+
+function showHardScoresForm() {
+    hardScores.sort(function(a, b) {
+        return b.score - a.score;
+    });
+    easyScores.sort(function(a, b) {
+        return b.score - a.score;
+    });
+    //If hard
+    if (difficulty == 1) {
+        if (turn > hardScores[9].score) {
+            $(".submit-score").css("visibility", "visible")
+        }
+    } else {
+        if (turn > easyScores[9].score) {
+            $(".submit-score").css("visibility", "visible")
+        }
+    }
+}
+
+$(".submit-score").submit(function(event) {
+
+    var tempScore = { "score": turn, "name": ($(this).serializeArray())[0].value }
+    //If hard
+    if (difficulty === 1) {
+        console.log(hardScores)
+        hardScores.push(tempScore)
+        hardScores.sort(function(a, b) {
+            return b.score - a.score;
+        });
+        showTable()
+        //If easy
+    }
+    else {
+        console.log(easyScores)
+        easyScores.push(tempScore)
+        easyScores.sort(function(a, b) {
+            return b.score - a.score;
+        });
+        showTable()
+    }
+    
+    $(".submit-score").css("visibility", "hidden")
+
+    event.preventDefault();
 });
