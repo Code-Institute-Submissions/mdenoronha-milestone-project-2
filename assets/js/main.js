@@ -4,7 +4,7 @@ var colorHighlightLength = 0;
 var timeOut;
 var countdownTimeLeft;
 var CheckedColorNumber = 0;
-var turn = 9;
+var turn = 0;
 var colorNumber = 0;
 
 var countdown
@@ -65,6 +65,7 @@ function countdownAsText() {
     }
 }
 // Timer
+//Timer needs fixing, it's not ending the game (plus after colour, timer doesn't reset properly)
 function timer() {
     countdownReset()
     console.log("Timer start")
@@ -85,7 +86,7 @@ function checkColor(e) {
         }
         //If color is wrong
         else {
-            showHardScoresForm()
+            showScoresForm()
             console.log("Loss")
             deactivateColors()
             clearTimeout(timeOut)
@@ -104,7 +105,7 @@ function checkColor(e) {
         }
         //If color is wrong
         else {
-            showHardScoresForm()
+            showScoresForm()
             deactivateColors()
             console.log("Loss")
             clearTimeout(timeOut)
@@ -115,12 +116,12 @@ function checkColor(e) {
 
 //Make colors active and clickable
 function activateColors() {
-    $("div").addClass("active")
+    $(".selector").addClass("active")
 }
 
 //Make colors inactive and not clickable
 function deactivateColors() {
-    $("div").removeClass("active")
+    $(".selector").removeClass("active")
 }
 
 
@@ -168,12 +169,12 @@ $(".start-game").on('click', function() {
 function highlightColors() {
     if (colorHighlightCount < colors.length - 1) {
         setTimeout(function() {
-            $("#" + colors[colorHighlightCount]).css("border", "20px solid black")
+            $("#" + colors[colorHighlightCount]).addClass("highlighted")
         }, 300)
         setTimeout(function() {
             highlightColors();
             colorHighlightCount++
-            $("div").css("border", "none")
+            $("div").removeClass("highlighted")
         }, 1750)
     }
 }
@@ -193,8 +194,9 @@ $(".hard").on("click", function() {
     $(".table").html("")
 });
 
+//Leaderboard functionality
 
-//Access hard score data
+//Access score data
 $(".show-scores").on("click", function() {
     $(".table").html("")
     showTable()
@@ -247,20 +249,21 @@ function showTable() {
             console.log(hardScores[i].name)
             tablerow.push(`<p>${hardScores[i].name}    ${hardScores[i].score}</p>`)
         }
-    //If easy
-    } else {
-       for (var i = 0; i < easyScores.length; i++) {
+        //If easy
+    }
+    else {
+        for (var i = 0; i < easyScores.length; i++) {
             if (i === 10) { break; }
             console.log(easyScores[i].name)
             tablerow.push(`<p>${easyScores[i].name}    ${easyScores[i].score}</p>`)
-        } 
+        }
     }
 
 
     $(".table").html(tablerow)
 }
 
-function showHardScoresForm() {
+function showScoresForm() {
     hardScores.sort(function(a, b) {
         return b.score - a.score;
     });
@@ -272,7 +275,8 @@ function showHardScoresForm() {
         if (turn > hardScores[9].score) {
             $(".submit-score").css("visibility", "visible")
         }
-    } else {
+    }
+    else {
         if (turn > easyScores[9].score) {
             $(".submit-score").css("visibility", "visible")
         }
@@ -300,7 +304,7 @@ $(".submit-score").submit(function(event) {
         });
         showTable()
     }
-    
+
     $(".submit-score").css("visibility", "hidden")
 
     event.preventDefault();

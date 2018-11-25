@@ -3,22 +3,27 @@
 
 <head>
     <title>Simon Game</title>
-    <style type="text/css">
-        .highlight {
-            background-color: black;
-        }
 
-        .submit-hard-score {
-            visibility: visible;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
 </head>
 
 <body>
-    <div id="0" style="float: left;background-color:blue;height:200px;width:200px"></div>
-    <div id="1" style="float: left;background-color:red;height:200px;width:200px"></div>
-    <div id="2" style="float: left;background-color:green;height:200px;width:200px"></div>
-    <div id="3" style="float: left;background-color:yellow;height:200px;width:200px"></div>
+
+    <header>
+        <h1>Play The Simon Game</h1>
+    </header>
+
+
+    <div class="game-container">
+        <div id="0" class="blue selector"></div>
+        <div id="1" class="red selector"></div>
+    </div>
+    <div class="game-container">
+        <div id="2" class="green selector"></div>
+        <div id="3" class="yellow selector"></div>
+    </div>
+
+
 
     <button class="start-game">Start Game</button>
     <div class="countdown_text"></div>
