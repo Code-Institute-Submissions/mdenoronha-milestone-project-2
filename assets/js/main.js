@@ -2,6 +2,7 @@ var colors = [];
 var colorHighlightCount = 0;
 var colorHighlightLength = 0;
 var timeOut;
+var textTimeOut;
 var countdownTimeLeft;
 var CheckedColorNumber = 0;
 var turn = 0;
@@ -60,18 +61,22 @@ function countdownAsText() {
         $(".countdown_text").html(`<p>${countdownTimeLeft + 1}</p>`);
 
         if (countdownTimeLeft > 0) {
-            setTimeout('countdownAsText()', 1000);
+            textTimeOut = setTimeout('countdownAsText()', 1000);
         }
     }
 }
 // Timer
-//Timer needs fixing, it's not ending the game (plus after colour, timer doesn't reset properly)
 function timer() {
     countdownReset()
     console.log("Timer start")
     timeOut = setTimeout(function() {
         console.log("Timeout")
         $(".countdown_text").html("")
+        showScoresForm()
+        console.log("Loss")
+        deactivateColors()
+        clearTimeout(timeOut)
+        clearTimeout(textTimeOut)
     }, 3000 * difficulty);
 }
 
@@ -83,6 +88,8 @@ function checkColor(e) {
         if (e.target.id == colors[colorNumber]) {
             console.log("Win")
             newRoundInit()
+            clearTimeout(timeOut)
+            clearTimeout(textTimeOut)
         }
         //If color is wrong
         else {
@@ -90,6 +97,7 @@ function checkColor(e) {
             console.log("Loss")
             deactivateColors()
             clearTimeout(timeOut)
+            clearTimeout(textTimeOut)
             console.log(colors)
         }
     }
@@ -99,6 +107,7 @@ function checkColor(e) {
         if (e.target.id == colors[colorNumber]) {
             console.log("Win")
             clearTimeout(timeOut)
+            clearTimeout(textTimeOut)
             timer()
             colorNumber++
             console.log(colors)
@@ -109,6 +118,7 @@ function checkColor(e) {
             deactivateColors()
             console.log("Loss")
             clearTimeout(timeOut)
+            clearTimeout(textTimeOut)
             console.log(colors)
         }
     }
