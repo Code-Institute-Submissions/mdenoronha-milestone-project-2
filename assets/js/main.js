@@ -257,6 +257,8 @@ $(".hard").on("click", function() {
 
 //Access score data
 $(".show-scores").on("click", function() {
+    $("#myModal").css("display", "block")
+    $(".submit-score").css("visibility", "hidden")
     $(".table").html("")
     showTable()
 });
@@ -332,12 +334,12 @@ function showScoresForm() {
     //If hard
     if (difficulty == 1) {
         if (turn > hardScores[9].score) {
-            $(".submit-score").css("visibility", "visible")
+            $("#myModal").css("display", "block")
         }
     }
     else {
         if (turn > easyScores[9].score) {
-            $(".submit-score").css("visibility", "visible")
+            $("#myModal").css("display", "block")
         }
     }
 }
@@ -363,7 +365,6 @@ $(".submit-score").submit(function(event) {
         });
         showTable()
     }
-
     $(".submit-score").css("visibility", "hidden")
 
     event.preventDefault();
@@ -373,23 +374,23 @@ $(".submit-score").submit(function(event) {
 //Modal Add own comments
 //https://www.w3schools.com/howto/howto_css_modals.asp
 
-// When the user clicks on the button, open the modal 
-$("#myBtn").on("click", function() {
+function leaderboardPopUp() {
     $("#myModal").css("display", "block")
-})
+}
 
 
 // When the user clicks on <span> (x), close the modal
 
 $(".close").on("click", function() {
     $("#myModal").css("display", "none")
+    $(".submit-score").css("visibility", "visible")
 })
 
 //When the user clicks anywhere outside of the modal, close it
 $(window).on("click", function(e) {
-    console.log(e.target)
      if($(event.target).hasClass('modal')) {
         $("#myModal").css("display", "none")
+        $(".submit-score").css("visibility", "visible")
     }
 })
 

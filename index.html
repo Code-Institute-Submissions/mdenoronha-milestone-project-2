@@ -16,15 +16,28 @@
         </div>
     </header>
 
-<!-- Trigger/Open The Modal -->
-<button id="myBtn">Open Modal</button>
+
 
     <div id="myModal" class="modal">
 
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
+            <form class="submit-score">
+                <div class="submit-title">
+                    <h2>GAME<br>OVER</h2>
+                </div>
+                <div class="leaderboard-message">
+                    <h3>YOU'VE MADE THE LEADERBOARD!</h3>
+                </div>
+                <div>
+                    <input placeholder="ENTER NAME" autocomplete="off" type="text" name="hardNameSubmit">
+                    <button class="submit-button">SUBMIT</button>
+                </div>
+            </form>
+            <div class="table">
+
+            </div>
         </div>
 
     </div>
@@ -58,17 +71,6 @@
 
 
 
-
-
-
-    <div class="table">
-
-    </div>
-
-    <form class="submit-score">
-        <input type="text" name="hardNameSubmit">
-        <button>Submit Score</button>
-    </form>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="assets/js/main.js"></script>
