@@ -5,35 +5,61 @@
     <title>Simon Game</title>
 
     <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC" rel="stylesheet">
 </head>
 
 <body>
 
     <header>
-        <h1>Play The Simon Game</h1>
+        <div class="title">
+            <h1>SIM<br> ON</h1>
+        </div>
     </header>
 
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
 
-    <div class="game-container">
-        <div id="0" class="blue selector"></div>
-        <div id="1" class="red selector"></div>
-    </div>
-    <div class="game-container">
-        <div id="2" class="green selector"></div>
-        <div id="3" class="yellow selector"></div>
-    </div>
+    <div id="myModal" class="modal">
 
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Some text in the Modal..</p>
+        </div>
 
-
-    <button class="start-game">Start Game</button>
-    <div class="countdown_text"></div>
-
-    <div class="difficulty-buttons">
-        <button class="easy">Easy</button>
-        <button class="hard">Hard</button>
     </div>
 
-    <button class="show-scores">Easy Scores</button>
+    <div class="menu-bar">
+        <div class="difficulty-buttons">
+            <button class="active-difficulty easy">EASY</button>
+            <button class="inactive-difficulty hard">HARD</button>
+            <button class="show-scores">LEADERBOARD</button>
+        </div>
+    </div>
+
+    <div class="timer-section">
+        <div class="countdown-text"></div>
+        <button class="start-game">Start Game</button>
+    </div>
+
+
+    <div class="simon-container">
+        <div class="row-container">
+            <p class="incorrect-message-1 message">WRONG!</p>
+            <p class="incorrect-message-2 message">TIMEOUT!</p>
+            <div id="0" class="blue selector"></div>
+            <div id="1" class="red selector"></div>
+        </div>
+        <div class="row-container">
+            <div id="2" class="green selector"></div>
+            <div id="3" class="yellow selector"></div>
+        </div>
+    </div>
+
+
+
+
+
 
     <div class="table">
 

@@ -57,8 +57,8 @@ function countdownAsText() {
     if (countdownTimeLeft > 0) {
         countdownTimeLeft--;
         console.log(countdownTimeLeft + 1)
-        //Need to fix this
-        $(".countdown_text").html(`<p>${countdownTimeLeft + 1}</p>`);
+
+        $(".countdown-text").html(`<p>TIME LEFT: ${countdownTimeLeft + 1}</p>`)
 
         if (countdownTimeLeft > 0) {
             textTimeOut = setTimeout('countdownAsText()', 1000);
@@ -71,12 +71,18 @@ function timer() {
     console.log("Timer start")
     timeOut = setTimeout(function() {
         console.log("Timeout")
-        $(".countdown_text").html("")
+        $(".countdown-text").html("")
         showScoresForm()
         console.log("Loss")
         deactivateColors()
         clearTimeout(timeOut)
         clearTimeout(textTimeOut)
+        $(".start-game").css("visibility", "visible")
+        $(".start-game").html("Play Again")
+        $(".incorrect-message-2").css("visibility", "visible")
+        setTimeout(function() {
+            $(".incorrect-message-2").css("visibility", "hidden")
+        }, 3000)
     }, 3000 * difficulty);
 }
 
@@ -93,12 +99,20 @@ function checkColor(e) {
         }
         //If color is wrong
         else {
+            //Need to put all below in game over function
             showScoresForm()
             console.log("Loss")
             deactivateColors()
             clearTimeout(timeOut)
             clearTimeout(textTimeOut)
             console.log(colors)
+            $(".countdown-text").html("")
+            $(".start-game").css("visibility", "visible")
+            $(".start-game").html("Play Again")
+            $(".incorrect-message-1").css("visibility", "visible")
+            setTimeout(function() {
+                $(".incorrect-message-1").css("visibility", "hidden")
+            }, 3000)
         }
     }
     //If not last color in the array
@@ -120,6 +134,13 @@ function checkColor(e) {
             clearTimeout(timeOut)
             clearTimeout(textTimeOut)
             console.log(colors)
+            $(".countdown-text").html("")
+            $(".start-game").css("visibility", "visible")
+            $(".start-game").html("Play Again")
+            $(".incorrect-message-1").css("visibility", "visible")
+            setTimeout(function() {
+                $(".incorrect-message-1").css("visibility", "hidden")
+            }, 3000)
         }
     }
 }
@@ -138,6 +159,9 @@ function deactivateColors() {
 //Start game
 function Gameinit() {
     resetVariables()
+    $(".incorrect-message-2").css("visibility", "hidden")
+    $(".incorrect-message-1").css("visibility", "hidden")
+    $(".start-game").css("visibility", "hidden")
     if (difficulty == 1) {
         randomColor(4)
         setTimeout(timer, 7300);
@@ -150,6 +174,7 @@ function Gameinit() {
         setTimeout(timer, 3650);
         setTimeout(activateColors, 3650);
     }
+    $(".start-game").css("visibility", "hidden")
 }
 
 //Start next round
@@ -177,30 +202,54 @@ $(".start-game").on('click', function() {
 
 //Highlight colors at beginning of round
 function highlightColors() {
-    if (colorHighlightCount < colors.length - 1) {
+    $(".countdown-text").html("<p>MEMORISE</p>")
+    if (colorHighlightCount < colors.length) {
+        if ($("#" + colors[colorHighlightCount]).hasClass("blue")) {
+            setTimeout(function() {
+                $("#" + colors[colorHighlightCount]).addClass("blue-highlighted")
+            }, 300)
+        }
+        else if ($("#" + colors[colorHighlightCount]).hasClass("red")) {
+            setTimeout(function() {
+                $("#" + colors[colorHighlightCount]).addClass("red-highlighted")
+            }, 300)
+        }
+        else if ($("#" + colors[colorHighlightCount]).hasClass("green")) {
+            setTimeout(function() {
+                $("#" + colors[colorHighlightCount]).addClass("green-highlighted")
+            }, 300)
+        }
+        else if ($("#" + colors[colorHighlightCount]).hasClass("yellow")) {
+            setTimeout(function() {
+                $("#" + colors[colorHighlightCount]).addClass("yellow-highlighted")
+            }, 300)
+        }
+
         setTimeout(function() {
-            $("#" + colors[colorHighlightCount]).addClass("highlighted")
-        }, 300)
-        setTimeout(function() {
-            highlightColors();
             colorHighlightCount++
-            $("div").removeClass("highlighted")
+            highlightColors();
+            $("div").removeClass("blue-highlighted")
+            $("div").removeClass("red-highlighted")
+            $("div").removeClass("yellow-highlighted")
+            $("div").removeClass("green-highlighted")
         }, 1750)
     }
 }
 
 //Difficulty buttons
 $(".easy").on("click", function() {
+    $(".easy").removeClass("inactive-difficulty").addClass("active-difficulty")
+    $(".hard").removeClass("active-difficulty").addClass("inactive-difficulty")
     difficulty = 2
     console.log(difficulty)
-    $(".show-scores").html("Easy Scores")
     $(".table").html("")
 });
 
 $(".hard").on("click", function() {
+    $(".easy").addClass("inactive-difficulty").removeClass("active-difficulty")
+    $(".hard").addClass("active-difficulty").removeClass("inactive-difficulty")
     difficulty = 1
     console.log(difficulty)
-    $(".show-scores").html("Hard Scores")
     $(".table").html("")
 });
 
@@ -319,3 +368,28 @@ $(".submit-score").submit(function(event) {
 
     event.preventDefault();
 });
+
+
+//Modal Add own comments
+//https://www.w3schools.com/howto/howto_css_modals.asp
+
+// When the user clicks on the button, open the modal 
+$("#myBtn").on("click", function() {
+    $("#myModal").css("display", "block")
+})
+
+
+// When the user clicks on <span> (x), close the modal
+
+$(".close").on("click", function() {
+    $("#myModal").css("display", "none")
+})
+
+//When the user clicks anywhere outside of the modal, close it
+$(window).on("click", function(e) {
+    console.log(e.target)
+     if($(event.target).hasClass('modal')) {
+        $("#myModal").css("display", "none")
+    }
+})
+

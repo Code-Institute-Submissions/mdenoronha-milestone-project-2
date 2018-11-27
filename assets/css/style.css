@@ -1,5 +1,81 @@
 body {
-    background-color: grey;
+    font-family: 'Bowlby One SC', cursive;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+h1 {
+    line-height: 1;
+    margin-bottom: 0px;
+    font-size: 7em;
+    margin-top: 0px;
+    color: #4de29f;
+    padding-left: 10px;
+}
+
+.timer-section {
+    margin-top: 20px;
+    width: 300px;
+    height: 75px;
+    background-color: #575959;
+}
+
+.countdown-text p {
+    color: white;
+    font-size: 2em;
+    text-align: center;
+    padding-top: 12px;
+    margin-top: 0
+}
+
+.start-game {
+    height: 75px;
+    width: 300px;
+    border: 0;
+    font-family: 'Bowlby One SC', cursive;
+    font-size: 1.5em;
+    outline: none;
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: #f6e4e9;
+    color: #4de29f;
+}
+
+.active-difficulty,
+.inactive-difficulty {
+    height: 75px;
+    width: 100px;
+    border: 0;
+    font-family: 'Bowlby One SC', cursive;
+    font-size: 1.5em;
+    outline: none;
+}
+
+.show-scores {
+    float: right;
+    width: 175px;
+    height: 75px;
+    font-size: 1.1em;
+    border: 0;
+    font-family: 'Bowlby One SC', cursive;
+    outline: none;
+    background-color: #f6e4e9;
+    color: #4de29f;
+}
+
+.active-difficulty {
+    background-color: #f6e4e9;
+    color: #4de29f;
+}
+
+.inactive-difficulty {
+    background-color: #575959;
+    color: #9fa79a;
+}
+
+.menu-bar {
+    background-color: #575959;
+    height: 75px;
 }
 
 .highlight {
@@ -16,48 +92,187 @@ body {
     margin: 20px;
 }
 
-.game-container {
+/*Needs changing for very small screens*/
+
+.simon-container {
+    background-color: #252626;
+    width: 465px;
+    margin: 20px auto;
+    border-radius: 25px;
+    position: relative;
+}
+
+.row-container {
     display: flex;
     justify-content: center;
 }
 
 .blue {
-    background-color: blue;
+    background-color: #44d9e6;
+    border-radius: 25px;
 
 }
 
 .red {
-    background-color: red;
-
-
+    background-color: #ff5c5c;
+    border-radius: 25px;
 }
 
 .green {
-    background-color: green;
+    background-color: #99e265;
+    border-radius: 25px;
 }
 
 .yellow {
-    background-color: yellow;
+    background-color: #fff952;
+    border-radius: 25px;
 }
 
 /*https://codepen.io/jackrugile/pen/ABeIi*/
 
-.highlighted {
-    animation: glow 300ms ease-out infinite alternate;
+.green-highlighted {
+    animation: green-glow 250ms ease-out infinite alternate;
     border-color: #393;
     box-shadow: 0 0 5px rgba(0, 255, 0, .2), inset 0 0 5px rgba(0, 255, 0, .1);
     color: #efe;
     outline: none;
+    background-color: #7dfb24;
 }
 
+.active.green:active {
+    background-color: #7dfb24;
+} 
 
-@keyframes glow {
+
+@keyframes green-glow {
     0% {
         border-color: #393;
-        box-shadow: 50 50 10px rgba(0, 255, 0, 0), inset 50 50 50px rgba(0, 255, 0, 0);
+        box-shadow: 50 50 120px rgba(0, 255, 0, 0), inset 50 50 5px rgba(0, 255, 0, 0);
     }
     100% {
         border-color: #6f6;
-        box-shadow: 0 0 75px rgba(0, 255, 0, .9), inset 0 0 5px rgba(0, 255, 0, .8);
+        box-shadow: 0 0 120px rgba(0, 255, 0, .9), inset 0 0 5px rgba(0, 255, 0, .8);
     }
+}
+
+.blue-highlighted {
+    animation: blue-glow 250ms ease-out infinite alternate;
+    border-color: #393;
+    box-shadow: 0 0 5px rgba(255, 255, 255, .2), inset 0 0 5px rgba(255, 255, 255, .1);
+    color: #efe;
+    outline: none;
+    background-color: #00ebff;
+}
+
+.active.blue:active {
+    background-color: #00ebff;
+} 
+
+@keyframes blue-glow {
+    0% {
+        border-color: #3afffc;
+        box-shadow: 0 0 120px rgba(0, 231, 255, 0), inset 0 0 5px rgba(0, 231, 255, .0);
+    }
+    100% {
+        border-color: #3afffc;
+        box-shadow: 0 0 120px rgba(0, 231, 255, 1), inset 0 0 5px rgba(0, 231, 255, .8);
+    }
+}
+
+.yellow-highlighted {
+    animation: yellow-glow 250ms ease-out infinite alternate;
+    border-color: #f4ff18;
+    box-shadow: 0 0 5px rgba(255, 255, 0, .2), inset 0 0 5px rgba(255, 255, 0, .1);
+    color: #efe;
+    outline: none;
+    background-color: #fbf211;
+}
+
+.active.yellow:active {
+    background-color: #fbf211;
+} 
+
+@keyframes yellow-glow {
+    0% {
+        border-color: #f4ff18;
+        box-shadow: 50 50 120px rgba(255, 255, 0, 0), inset 50 50 5px rgba(255, 255, 0, 0);
+    }
+    100% {
+        border-color: #f4ff18;
+        box-shadow: 0 0 120px rgba(255, 255, 0, .9), inset 0 0 5px rgba(255, 255, 0, .8);
+    }
+}
+
+.red-highlighted {
+    animation: red-glow 250ms ease-out infinite alternate;
+    border-color: #fc003e;
+    box-shadow: 0 0 5px rgba(255, 0, 0, .2), inset 0 0 5px rgba(255, 0, 0, .1);
+    color: #efe;
+    outline: none;
+    background-color: #ef3131;
+}
+
+.active.red:active {
+    background-color: #ef3131;
+} 
+
+@keyframes red-glow {
+    0% {
+        border-color: #fc003e;
+        box-shadow: 50 50 120px rgba(255, 0, 0, 0), inset 50 50 5px rgba(255, 0, 0, 0);
+    }
+    100% {
+        border-color: #fc003e;
+        box-shadow: 0 0 120px rgba(255, 0, 0, .9), inset 0 0 5px rgba(255, 0, 0, .8);
+    }
+}
+
+.message {
+    position: absolute;
+    z-index: 1;
+    transform: rotate(24deg);
+    font-size: 2em;
+    left: 387px;
+    top: -90px;
+    visibility: hidden;
+}
+
+/* The Modal (background) */
+/*Need to edit!!*/
+/*https://www.w3schools.com/howto/howto_css_modals.asp*/
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
