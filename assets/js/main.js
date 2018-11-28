@@ -45,6 +45,7 @@ function resetVariables() {
     colorHighlightLength = 0
     colors = []
     $(".table").html("")
+    $(".leaderboard-title").css("display", "none")
 }
 
 //Timer as text
@@ -78,7 +79,7 @@ function timer() {
         clearTimeout(timeOut)
         clearTimeout(textTimeOut)
         $(".start-game").css("visibility", "visible")
-        $(".start-game").html("Play Again")
+        $(".start-game").html("PLAY AGAIN")
         $(".incorrect-message-2").css("visibility", "visible")
         setTimeout(function() {
             $(".incorrect-message-2").css("visibility", "hidden")
@@ -243,6 +244,7 @@ $(".easy").on("click", function() {
     difficulty = 2
     console.log(difficulty)
     $(".table").html("")
+    $(".leaderboard-title").css("display", "none")
 });
 
 $(".hard").on("click", function() {
@@ -251,6 +253,7 @@ $(".hard").on("click", function() {
     difficulty = 1
     console.log(difficulty)
     $(".table").html("")
+    $(".leaderboard-title").css("display", "none")
 });
 
 //Leaderboard functionality
@@ -258,7 +261,8 @@ $(".hard").on("click", function() {
 //Access score data
 $(".show-scores").on("click", function() {
     $("#myModal").css("display", "block")
-    $(".submit-score").css("visibility", "hidden")
+    $(".submit-score").css("display", "none")
+    $(".leaderboard-title").css("display", "none")
     $(".table").html("")
     showTable()
 });
@@ -304,24 +308,32 @@ function showTable() {
     var tablerow = []
 
     //If hard
+    $(".leaderboard-title").css("display", "block")
+    $(".leaderboard-title").html(`<h2>HARD<br>LEADERBOARD</h2>`)
     if (difficulty === 1) {
+        tablerow.push(`<tr><th></th><th>Name</th><th>Score</th></tr>`)
         for (var i = 0; i < hardScores.length; i++) {
-            if (i === 10) { break; }
+            if (i === 10) { 
+                break; }
             console.log(hardScores[i].name)
-            tablerow.push(`<p>${hardScores[i].name}    ${hardScores[i].score}</p>`)
+            tablerow.push(`<tr><td>${i + 1}</td><td>${hardScores[i].name}</td><td>${hardScores[i].score}</td></tr>`)
         }
         //If easy
     }
     else {
+        $(".leaderboard-title").css("display", "block")
+        $(".leaderboard-title").html(`<h2>EASY<br>LEADERBOARD</h2>`)
+        tablerow.push(`<tr><th></th><th>Name</th><th>Score</th></tr>`)
         for (var i = 0; i < easyScores.length; i++) {
-            if (i === 10) { break; }
+            if (i === 10) { 
+                break; }
             console.log(easyScores[i].name)
-            tablerow.push(`<p>${easyScores[i].name}    ${easyScores[i].score}</p>`)
+            tablerow.push(`<tr><td>${i + 1}</td><td>${easyScores[i].name}</td><td>${easyScores[i].score}</td></tr>`)
         }
     }
 
-
     $(".table").html(tablerow)
+    console.log(tablerow)
 }
 
 function showScoresForm() {
@@ -365,7 +377,7 @@ $(".submit-score").submit(function(event) {
         });
         showTable()
     }
-    $(".submit-score").css("visibility", "hidden")
+    $(".submit-score").css("display", "none")
 
     event.preventDefault();
 });
@@ -383,14 +395,13 @@ function leaderboardPopUp() {
 
 $(".close").on("click", function() {
     $("#myModal").css("display", "none")
-    $(".submit-score").css("visibility", "visible")
+    $(".submit-score").css("display", "block")
 })
 
 //When the user clicks anywhere outside of the modal, close it
 $(window).on("click", function(e) {
-     if($(event.target).hasClass('modal')) {
+    if ($(event.target).hasClass('modal')) {
         $("#myModal").css("display", "none")
-        $(".submit-score").css("visibility", "visible")
+        $(".submit-score").css("display", "block")
     }
 })
-

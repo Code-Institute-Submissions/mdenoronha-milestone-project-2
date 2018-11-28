@@ -1,3 +1,5 @@
+/*CHANGE ALL EMs to VWs*/
+
 body {
     font-family: 'Bowlby One SC', cursive;
     margin-left: 0px;
@@ -241,7 +243,7 @@ h1 {
 /*https://www.w3schools.com/howto/howto_css_modals.asp*/
 
 .modal {
-    display: none; 
+    display: none;
     position: fixed;
     /* Stay in place */
     z-index: 2;
@@ -348,3 +350,110 @@ input[name="hardNameSubmit"] {
     padding: 0;
     font-size: 3vw;
 }
+
+.leaderboard-title {
+    line-height: 1;
+    margin-bottom: 0px;
+    font-size: 5.5vw;
+    margin-top: 0px;
+    color: #4de29f;
+    padding-left: 10px;
+    padding-top: 10px;
+    display: none;
+}
+
+.leaderboard-title h2 {
+    margin: 0;
+}
+
+.table {
+    width: 100%;
+    padding-top: 20px;
+    text-align: center;
+}
+
+
+
+.table th {
+    text-align: left;
+    width: 24%;
+}
+
+
+
+.table th:first-child {
+    width: 8%;
+}
+
+.table tr:nth-child(2) {
+    font-size: 5vw;
+}
+
+.table tr:nth-child(3) {
+    font-size: 4vw;
+}
+
+
+.table tr:nth-child(4) {
+    font-size: 3vw;
+}
+
+.yellow-circle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: yellow;
+    left: 387px;
+    top: -90px;
+    z-index: 4;
+}
+
+.test::after {
+    width: 12px;
+    height: 12px;
+    display: block;
+    top: 2.4em;
+    position: absolute;
+    left: -6px;
+    border-radius: 12px;
+    content: '';
+    background: #fafafa;
+}
+
+.table tr:nth-child(2) td:first-child {
+    background-color: yellow;
+    border-radius: 100%;
+    padding: 20px;
+}
+
+
+.table tr:nth-child(2) td:nth-child(2),
+.table tr:nth-child(2) td:nth-child(3) {
+    background: -webkit-linear-gradient(top, rgba(30, 87, 153, 0) 0%, rgba(41, 137, 216, 0) 20%, rgb(252, 255, 0) 21%, rgb(252, 255, 0) 80%, rgba(255, 48, 48, 0) 81%, rgba(255, 0, 0, 0) 100%);
+}
+
+/*padding: 20px 20px;*/
+
+/*    background-color: red;*/
+
+/*    border-radius: 100%;*/
+
+/*        background: -webkit-linear-gradient(top, rgba(30,87,153,0) 0%,rgba(41,137,216,0) 20%,rgba(255,48,48,1) 21%,rgba(255,0,0,1) 80%, rgba(255, 48, 48, 0) 81%,rgba(255, 0, 0, 0) 100%);*/
+
+/*        padding: 5px 5px;*/
+
+/*    background-color: red;*/
+
+/*    border-radius: 100%;*/
+
+/*    position: relative;*/
+
+/*    -webkit-box-shadow: 0px 2px 0px 28px rgba(240,0,0,1);*/
+
+/*    -moz-box-shadow: 0px 2px 0px 28px rgba(240,0,0,1);*/
+
+/*    box-shadow: 0px 2px 0px 12px rgb(255, 0, 0);*/
+
+/*    height: 1vw;*/
+
+/*}*/
