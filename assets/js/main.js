@@ -78,6 +78,9 @@ function timer() {
         deactivateColors()
         clearTimeout(timeOut)
         clearTimeout(textTimeOut)
+        $(".easy").addClass("active-button")
+        $(".hard").addClass("active-button")
+        $(".show-scores").addClass("active-button")
         $(".start-game").css("visibility", "visible")
         $(".start-game").html("PLAY AGAIN")
         $(".incorrect-message-2").css("visibility", "visible")
@@ -108,8 +111,11 @@ function checkColor(e) {
             clearTimeout(textTimeOut)
             console.log(colors)
             $(".countdown-text").html("")
+            $(".easy").addClass("active-button")
+            $(".hard").addClass("active-button")
+            $(".show-scores").addClass("active-button")
             $(".start-game").css("visibility", "visible")
-            $(".start-game").html("Play Again")
+            $(".start-game").html("PLAY AGAIN")
             $(".incorrect-message-1").css("visibility", "visible")
             setTimeout(function() {
                 $(".incorrect-message-1").css("visibility", "hidden")
@@ -135,9 +141,12 @@ function checkColor(e) {
             clearTimeout(timeOut)
             clearTimeout(textTimeOut)
             console.log(colors)
+            $(".easy").addClass("active-button")
+            $(".hard").addClass("active-button")
+            $(".show-scores").addClass("active-button")
             $(".countdown-text").html("")
             $(".start-game").css("visibility", "visible")
-            $(".start-game").html("Play Again")
+            $(".start-game").html("PLAY AGAIN")
             $(".incorrect-message-1").css("visibility", "visible")
             setTimeout(function() {
                 $(".incorrect-message-1").css("visibility", "hidden")
@@ -160,6 +169,9 @@ function deactivateColors() {
 //Start game
 function Gameinit() {
     resetVariables()
+    $(".easy").removeClass("active-button")
+    $(".hard").removeClass("active-button")
+    $(".show-scores").removeClass("active-button")
     $(".incorrect-message-2").css("visibility", "hidden")
     $(".incorrect-message-1").css("visibility", "hidden")
     $(".start-game").css("visibility", "hidden")
@@ -239,32 +251,38 @@ function highlightColors() {
 
 //Difficulty buttons
 $(".easy").on("click", function() {
-    $(".easy").removeClass("inactive-difficulty").addClass("active-difficulty")
-    $(".hard").removeClass("active-difficulty").addClass("inactive-difficulty")
-    difficulty = 2
-    console.log(difficulty)
-    $(".table").html("")
-    $(".leaderboard-title").css("display", "none")
+    if ($(this).hasClass("active-button")) {
+        $(".easy").removeClass("not-selected-difficulty").addClass("selected-difficulty")
+        $(".hard").removeClass("selected-difficulty").addClass("not-selected-difficulty")
+        difficulty = 2
+        console.log(difficulty)
+        $(".table").html("")
+        $(".leaderboard-title").css("display", "none")
+    }
 });
 
 $(".hard").on("click", function() {
-    $(".easy").addClass("inactive-difficulty").removeClass("active-difficulty")
-    $(".hard").addClass("active-difficulty").removeClass("inactive-difficulty")
-    difficulty = 1
-    console.log(difficulty)
-    $(".table").html("")
-    $(".leaderboard-title").css("display", "none")
+    if ($(this).hasClass("active-button")) {
+        $(".easy").addClass("not-selected-difficulty").removeClass("selected-difficulty")
+        $(".hard").addClass("selected-difficulty").removeClass("not-selected-difficulty")
+        difficulty = 1
+        console.log(difficulty)
+        $(".table").html("")
+        $(".leaderboard-title").css("display", "none")
+    }
 });
 
 //Leaderboard functionality
 
 //Access score data
 $(".show-scores").on("click", function() {
-    $("#myModal").css("display", "block")
-    $(".submit-score").css("display", "none")
-    $(".leaderboard-title").css("display", "none")
-    $(".table").html("")
-    showTable()
+    if ($(this).hasClass("active-button")) {
+        $("#myModal").css("display", "block")
+        $(".submit-score").css("display", "none")
+        $(".leaderboard-title").css("display", "none")
+        $(".table").html("")
+        showTable()
+    }
 });
 
 
@@ -313,8 +331,9 @@ function showTable() {
     if (difficulty === 1) {
         tablerow.push(`<tr><th></th><th>Name</th><th>Score</th></tr>`)
         for (var i = 0; i < hardScores.length; i++) {
-            if (i === 10) { 
-                break; }
+            if (i === 10) {
+                break;
+            }
             console.log(hardScores[i].name)
             tablerow.push(`<tr><td>${i + 1}</td><td>${hardScores[i].name}</td><td>${hardScores[i].score}</td></tr>`)
         }
@@ -325,8 +344,9 @@ function showTable() {
         $(".leaderboard-title").html(`<h2>EASY<br>LEADERBOARD</h2>`)
         tablerow.push(`<tr><th></th><th>Name</th><th>Score</th></tr>`)
         for (var i = 0; i < easyScores.length; i++) {
-            if (i === 10) { 
-                break; }
+            if (i === 10) {
+                break;
+            }
             console.log(easyScores[i].name)
             tablerow.push(`<tr><td>${i + 1}</td><td>${easyScores[i].name}</td><td>${easyScores[i].score}</td></tr>`)
         }
@@ -392,7 +412,6 @@ function leaderboardPopUp() {
 
 
 // When the user clicks on <span> (x), close the modal
-
 $(".close").on("click", function() {
     $("#myModal").css("display", "none")
     $(".submit-score").css("display", "block")

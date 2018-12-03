@@ -4,6 +4,7 @@ body {
     font-family: 'Bowlby One SC', cursive;
     margin-left: 0px;
     margin-right: 0px;
+    background-color: #e6e6e6;
 }
 
 h1 {
@@ -11,73 +12,96 @@ h1 {
     margin-bottom: 0px;
     font-size: 11vw;
     margin-top: 0px;
-    color: #4de29f;
+    color: #00874a;
     padding-left: 10px;
 }
 
 .timer-section {
     margin-top: 20px;
-    width: 300px;
-    height: 75px;
+    width: 40%;
+    height: 100px;
     background-color: #575959;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 9px 12px 0px, rgba(0, 0, 0, 0.19) 0px 9px 21px 0px;
 }
 
-.countdown-text p {
+.countdown-text {
+
     color: white;
-    font-size: 2em;
-    text-align: center;
-    padding-top: 12px;
-    margin-top: 0
+    font-size: 3.5vw;
 }
+
+
+
 
 .start-game {
-    height: 75px;
-    width: 300px;
+    height: 100px;
+    width: 100%;
     border: 0;
     font-family: 'Bowlby One SC', cursive;
-    font-size: 1.5em;
+    font-size: 3vw;
     outline: none;
     margin-left: 0px;
     margin-right: 0px;
     background-color: #f6e4e9;
-    color: #4de29f;
+    color: #00874a;
 }
 
-.active-difficulty,
-.inactive-difficulty {
-    height: 75px;
-    width: 100px;
+.selected-difficulty,
+.not-selected-difficulty {
+    height: 100px;
+    width: 15%;
     border: 0;
     font-family: 'Bowlby One SC', cursive;
-    font-size: 1.5em;
+    font-size: 3vw;
     outline: none;
 }
 
 .show-scores {
     float: right;
-    width: 175px;
-    height: 75px;
-    font-size: 1.1em;
+    width: 30%;
+    height: 100px;
+    font-size: 3vw;
     border: 0;
     font-family: 'Bowlby One SC', cursive;
     outline: none;
     background-color: #f6e4e9;
-    color: #4de29f;
+    color: #00874a;
 }
 
-.active-difficulty {
+.easy:not(.active-button),
+.hard:not(.active-button),
+.show-scores:not(.active-button) {
+    opacity: 0.3;
+}
+
+.easy {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.hard {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+
+.selected-difficulty {
     background-color: #f6e4e9;
-    color: #4de29f;
+    color: #00874a;
 }
 
-.inactive-difficulty {
+.not-selected-difficulty {
     background-color: #575959;
     color: #9fa79a;
 }
 
 .menu-bar {
     background-color: #575959;
-    height: 75px;
+    height: 100px;
 }
 
 .highlight {
@@ -91,6 +115,13 @@ h1 {
     margin: 20px;
 }
 
+.selector {
+    -webkit-transition: background-color 0.2s ease;
+    -moz-transition: background-color 0.2s ease;
+    -o-transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease;
+}
+
 /*Needs changing for very small screens*/
 
 .simon-container {
@@ -99,6 +130,7 @@ h1 {
     margin: 20px auto;
     border-radius: 25px;
     position: relative;
+    box-shadow: 10px 10px 11px -1px #838483;
 }
 
 .row-container {
@@ -107,39 +139,39 @@ h1 {
 }
 
 .blue {
-    background-color: #44d9e6;
+    background-color: #81d0d7;
     border-radius: 25px;
 
 }
 
 .red {
-    background-color: #ff5c5c;
+    background-color: #ff9c9c;
     border-radius: 25px;
 }
 
 .green {
-    background-color: #99e265;
+    background-color: #a0d07d;
     border-radius: 25px;
 }
 
 .yellow {
-    background-color: #fff952;
+    background-color: #d5d05d;
     border-radius: 25px;
 }
 
 /*https://codepen.io/jackrugile/pen/ABeIi*/
 
 .green-highlighted {
-    animation: green-glow 250ms ease-out infinite alternate;
+    animation: green-glow 750ms ease-out infinite alternate;
     border-color: #393;
     box-shadow: 0 0 5px rgba(0, 255, 0, .2), inset 0 0 5px rgba(0, 255, 0, .1);
     color: #efe;
     outline: none;
-    background-color: #7dfb24;
+    background-color: #6aff00;
 }
 
 .active.green:active {
-    background-color: #7dfb24;
+    background-color: #6aff00;
 }
 
 
@@ -155,7 +187,7 @@ h1 {
 }
 
 .blue-highlighted {
-    animation: blue-glow 250ms ease-out infinite alternate;
+    animation: blue-glow 750ms ease-out infinite alternate;
     border-color: #393;
     box-shadow: 0 0 5px rgba(255, 255, 255, .2), inset 0 0 5px rgba(255, 255, 255, .1);
     color: #efe;
@@ -179,16 +211,16 @@ h1 {
 }
 
 .yellow-highlighted {
-    animation: yellow-glow 250ms ease-out infinite alternate;
+    animation: yellow-glow 750ms ease-out infinite alternate;
     border-color: #f4ff18;
     box-shadow: 0 0 5px rgba(255, 255, 0, .2), inset 0 0 5px rgba(255, 255, 0, .1);
     color: #efe;
     outline: none;
-    background-color: #fbf211;
+    background-color: #fff500;
 }
 
 .active.yellow:active {
-    background-color: #fbf211;
+    background-color: #fff500;
 }
 
 @keyframes yellow-glow {
@@ -203,16 +235,16 @@ h1 {
 }
 
 .red-highlighted {
-    animation: red-glow 250ms ease-out infinite alternate;
+    animation: red-glow 750ms ease-out infinite alternate;
     border-color: #fc003e;
     box-shadow: 0 0 5px rgba(255, 0, 0, .2), inset 0 0 5px rgba(255, 0, 0, .1);
     color: #efe;
     outline: none;
-    background-color: #ef3131;
+    background-color: #ff0000;
 }
 
 .active.red:active {
-    background-color: #ef3131;
+    background-color: #ff0000;
 }
 
 @keyframes red-glow {
@@ -297,13 +329,13 @@ h1 {
     margin-left: 5px;
     font-size: 4em;
     line-height: 1;
-    color: #4de29f;
+    color: #00874a;
 }
 
 .leaderboard-message {
     font-size: 3em;
     text-align: center;
-    color: #44d9e6;
+    color: #33acb7;
     line-height: 1.1;
 }
 
@@ -330,7 +362,7 @@ input[name="hardNameSubmit"] {
     width: 70%;
     font-family: 'Bowlby One SC', cursive;
     color: #9fa79a;
-    height: 75px;
+    height: 100px;
     font-size: 2em;
     padding-left: 5%;
     outline: none;
@@ -342,9 +374,9 @@ input[name="hardNameSubmit"] {
     border: none;
     width: 25%;
     vertical-align: middle;
-    height: 75px;
+    height: 100px;
     background-color: #f6e4e9;
-    color: #4de29f;
+    color: #00874a;
     font-family: 'Bowlby One SC', cursive;
     float: right;
     padding: 0;
@@ -354,9 +386,8 @@ input[name="hardNameSubmit"] {
 .leaderboard-title {
     line-height: 1;
     margin-bottom: 0px;
-    font-size: 5.5vw;
     margin-top: 0px;
-    color: #4de29f;
+    color: #00874a;
     padding-left: 10px;
     padding-top: 10px;
     display: none;
@@ -364,18 +395,20 @@ input[name="hardNameSubmit"] {
 
 .leaderboard-title h2 {
     margin: 0;
+    font-size: 5.5vw;
 }
 
 .table {
-    width: 100%;
+    width: 97%;
+    margin: 0 auto;
     padding-top: 20px;
     text-align: center;
+    border-collapse: collapse;
 }
 
 
 
 .table th {
-    text-align: left;
     width: 24%;
 }
 
@@ -408,52 +441,49 @@ input[name="hardNameSubmit"] {
     z-index: 4;
 }
 
-.test::after {
-    width: 12px;
-    height: 12px;
-    display: block;
-    top: 2.4em;
-    position: absolute;
-    left: -6px;
-    border-radius: 12px;
-    content: '';
-    background: #fafafa;
-}
-
 .table tr:nth-child(2) td:first-child {
     background-color: yellow;
     border-radius: 100%;
     padding: 20px;
 }
 
-
-.table tr:nth-child(2) td:nth-child(2),
-.table tr:nth-child(2) td:nth-child(3) {
-    background: -webkit-linear-gradient(top, rgba(30, 87, 153, 0) 0%, rgba(41, 137, 216, 0) 20%, rgb(252, 255, 0) 21%, rgb(252, 255, 0) 80%, rgba(255, 48, 48, 0) 81%, rgba(255, 0, 0, 0) 100%);
+.table tr:nth-child(2) td:nth-child(2) {
+    background-color: yellow;
+    border-radius: 30px 0px 0px 30px;
 }
 
-/*padding: 20px 20px;*/
 
-/*    background-color: red;*/
+.table tr:nth-child(2) td:nth-child(3) {
+    background-color: yellow;
+    border-radius: 0px 30px 30px 0px;
+}
 
-/*    border-radius: 100%;*/
+.table tr:nth-child(3) td:nth-child(2) {
+    background-color: rgba(252, 255, 0, .5);
+    border-radius: 30px 0px 0px 30px;
+}
 
-/*        background: -webkit-linear-gradient(top, rgba(30,87,153,0) 0%,rgba(41,137,216,0) 20%,rgba(255,48,48,1) 21%,rgba(255,0,0,1) 80%, rgba(255, 48, 48, 0) 81%,rgba(255, 0, 0, 0) 100%);*/
+.table tr:nth-child(3) td:nth-child(3) {
+    background-color: rgba(252, 255, 0, .5);
+    border-radius: 0px 30px 30px 0px;
+}
 
-/*        padding: 5px 5px;*/
+.table tr:nth-child(4) td:nth-child(2) {
+    background-color: rgba(252, 255, 0, .2);
+    border-radius: 30px 0px 0px 30px;
+}
 
-/*    background-color: red;*/
+.table tr:nth-child(4) td:nth-child(3) {
+    background-color: rgba(252, 255, 0, .2);
+    border-radius: 0px 30px 30px 0px;
+}
 
-/*    border-radius: 100%;*/
+td {
+    padding: 10px;
+}
 
-/*    position: relative;*/
 
-/*    -webkit-box-shadow: 0px 2px 0px 28px rgba(240,0,0,1);*/
-
-/*    -moz-box-shadow: 0px 2px 0px 28px rgba(240,0,0,1);*/
-
-/*    box-shadow: 0px 2px 0px 12px rgb(255, 0, 0);*/
-
-/*    height: 1vw;*/
-
-/*}*/
+tr {
+    font-size: 2.2vw;
+    color: #00874a;
+}
