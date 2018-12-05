@@ -2,48 +2,59 @@
 
 body {
     font-family: 'Bowlby One SC', cursive;
-    margin-left: 0px;
-    margin-right: 0px;
+    margin: 0;
     background-color: #e6e6e6;
 }
 
 h1 {
     line-height: 1;
     margin-bottom: 0px;
-    font-size: 11vw;
     margin-top: 0px;
-    color: #00874a;
     padding-left: 10px;
+    font-size: 3em;
+    color: #91d372;
+}
+
+.title {
+    padding: 5px;
+    background-color: #575959;
 }
 
 .timer-section {
-    margin-top: 20px;
-    width: 40%;
-    height: 100px;
+    margin: 0 auto;
+    width: 60%;
+    height: 60px;
     background-color: #575959;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 9px 12px 0px, rgba(0, 0, 0, 0.19) 0px 9px 21px 0px;
 }
 
 .countdown-text {
-
     color: white;
     font-size: 3.5vw;
 }
 
-
+.game-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 660px;
+    height: 89vh;
+}
 
 
 .start-game {
-    height: 100px;
+    line-height: 1.8;
+    text-shadow: #00ff00 0 0 1px, #00ff00 1px 1px 10px;
+    height: 60px;
     width: 100%;
-    border: 0;
-    font-family: 'Bowlby One SC', cursive;
-    font-size: 3vw;
+    font-family: Orbitron, cursive;
+    font-size: 2em;
     outline: none;
     margin-left: 0px;
     margin-right: 0px;
-    background-color: #f6e4e9;
-    color: #00874a;
+    background-color: #063110;
+    color: #0ddc0d;
+    border: solid 3px black;
 }
 
 .selected-difficulty,
@@ -64,8 +75,8 @@ h1 {
     border: 0;
     font-family: 'Bowlby One SC', cursive;
     outline: none;
-    background-color: #f6e4e9;
-    color: #00874a;
+    color: #7cd664;
+    background-color: #004a14;
 }
 
 .easy:not(.active-button),
@@ -90,8 +101,8 @@ h1 {
 
 
 .selected-difficulty {
-    background-color: #f6e4e9;
-    color: #00874a;
+    color: #91d372;
+    background-color: #004a14;
 }
 
 .not-selected-difficulty {
@@ -102,6 +113,9 @@ h1 {
 .menu-bar {
     background-color: #575959;
     height: 100px;
+    width: 100%;
+    bottom: 0;
+    margin-top: auto;
 }
 
 .highlight {
@@ -125,11 +139,11 @@ h1 {
 /*Needs changing for very small screens*/
 
 .simon-container {
+    position: relative;
+    margin: 0 auto;
     background-color: #252626;
     width: 465px;
-    margin: 20px auto;
     border-radius: 25px;
-    position: relative;
     box-shadow: 10px 10px 11px -1px #838483;
 }
 

@@ -15,6 +15,11 @@ var difficulty = 2
 
 var hardScores
 var easyScores
+var sounds = ["http://s1download-universal-soundbank.com/mp3/sounds/20840.mp3",
+    "http://s1download-universal-soundbank.com/mp3/sounds/20848.mp3",
+    "http://s1download-universal-soundbank.com/mp3/sounds/20842.mp3",
+    "http://s1download-universal-soundbank.com/mp3/sounds/20841.mp3"
+];
 
 //Load scores on load
 loadHardScores()
@@ -30,7 +35,8 @@ function randomColor(numOfTimes) {
     return colors
 }
 
-//On key press - change mode
+
+//Click on active tiles, check if correct colour is clicked
 $(document).on('click', '.active', function(e) {
     checkColor(e)
     console.log(e)
@@ -59,7 +65,7 @@ function countdownAsText() {
         countdownTimeLeft--;
         console.log(countdownTimeLeft + 1)
 
-        $(".countdown-text").html(`<p>TIME LEFT: ${countdownTimeLeft + 1}</p>`)
+        $(".start-game").html(`TIME LEFT: ${countdownTimeLeft + 1}`)
 
         if (countdownTimeLeft > 0) {
             textTimeOut = setTimeout('countdownAsText()', 1000);
@@ -80,6 +86,7 @@ function timer() {
         clearTimeout(textTimeOut)
         $(".easy").addClass("active-button")
         $(".hard").addClass("active-button")
+        $(".start-game").addClass("active-start")
         $(".show-scores").addClass("active-button")
         $(".start-game").css("visibility", "visible")
         $(".start-game").html("PLAY AGAIN")
@@ -113,6 +120,7 @@ function checkColor(e) {
             $(".countdown-text").html("")
             $(".easy").addClass("active-button")
             $(".hard").addClass("active-button")
+            $(".start-game").addClass("active-start")
             $(".show-scores").addClass("active-button")
             $(".start-game").css("visibility", "visible")
             $(".start-game").html("PLAY AGAIN")
@@ -143,6 +151,7 @@ function checkColor(e) {
             console.log(colors)
             $(".easy").addClass("active-button")
             $(".hard").addClass("active-button")
+            $(".start-game").addClass("active-start")
             $(".show-scores").addClass("active-button")
             $(".countdown-text").html("")
             $(".start-game").css("visibility", "visible")
@@ -174,7 +183,6 @@ function Gameinit() {
     $(".show-scores").removeClass("active-button")
     $(".incorrect-message-2").css("visibility", "hidden")
     $(".incorrect-message-1").css("visibility", "hidden")
-    $(".start-game").css("visibility", "hidden")
     if (difficulty == 1) {
         randomColor(4)
         setTimeout(timer, 7300);
@@ -187,7 +195,6 @@ function Gameinit() {
         setTimeout(timer, 3650);
         setTimeout(activateColors, 3650);
     }
-    $(".start-game").css("visibility", "hidden")
 }
 
 //Start next round
@@ -208,14 +215,17 @@ function newRoundInit() {
 
 //Start game button
 $(".start-game").on('click', function() {
-    resetVariables()
-    Gameinit()
+    if ($(this).hasClass('active-start')) {
+        resetVariables()
+        Gameinit()
+        $(this).removeClass("active-start")
+    }
 });
 
 
 //Highlight colors at beginning of round
 function highlightColors() {
-    $(".countdown-text").html("<p>MEMORISE</p>")
+    $(".start-game").html(`MEMORISE`)
     if (colorHighlightCount < colors.length) {
         if ($("#" + colors[colorHighlightCount]).hasClass("blue")) {
             setTimeout(function() {
@@ -285,7 +295,7 @@ $(".show-scores").on("click", function() {
     }
 });
 
-
+//Load hard scores
 function loadHardScores() {
 
     var xhr = new XMLHttpRequest();
@@ -304,6 +314,7 @@ function loadHardScores() {
     }
 }
 
+//Load easy scores
 function loadEasyScores() {
 
     var xhr = new XMLHttpRequest();
@@ -322,6 +333,7 @@ function loadEasyScores() {
     }
 }
 
+//Show leaderboard
 function showTable() {
     var tablerow = []
 
@@ -356,6 +368,7 @@ function showTable() {
     console.log(tablerow)
 }
 
+//Show enter score form
 function showScoresForm() {
     hardScores.sort(function(a, b) {
         return b.score - a.score;
@@ -376,6 +389,7 @@ function showScoresForm() {
     }
 }
 
+//Submit score
 $(".submit-score").submit(function(event) {
 
     var tempScore = { "score": turn, "name": ($(this).serializeArray())[0].value }
@@ -403,21 +417,21 @@ $(".submit-score").submit(function(event) {
 });
 
 
-//Modal Add own comments
+
 //https://www.w3schools.com/howto/howto_css_modals.asp
 
+//Leaderboard pop up
 function leaderboardPopUp() {
     $("#myModal").css("display", "block")
 }
 
-
-// When the user clicks on <span> (x), close the modal
+//Close leaderboard pop up
 $(".close").on("click", function() {
     $("#myModal").css("display", "none")
     $(".submit-score").css("display", "block")
 })
 
-//When the user clicks anywhere outside of the modal, close it
+//Close leaderboard pop up
 $(window).on("click", function(e) {
     if ($(event.target).hasClass('modal')) {
         $("#myModal").css("display", "none")
