@@ -84,6 +84,7 @@ function timer() {
         deactivateColors()
         clearTimeout(timeOut)
         clearTimeout(textTimeOut)
+        $(".counter").html("0")
         $(".easy").addClass("active-button")
         $(".hard").addClass("active-button")
         $(".start-game").addClass("active-start")
@@ -117,6 +118,7 @@ function checkColor(e) {
             clearTimeout(timeOut)
             clearTimeout(textTimeOut)
             console.log(colors)
+            $(".counter").html("0")
             $(".countdown-text").html("")
             $(".easy").addClass("active-button")
             $(".hard").addClass("active-button")
@@ -149,6 +151,7 @@ function checkColor(e) {
             clearTimeout(timeOut)
             clearTimeout(textTimeOut)
             console.log(colors)
+            $(".counter").html("0")
             $(".easy").addClass("active-button")
             $(".hard").addClass("active-button")
             $(".start-game").addClass("active-start")
@@ -185,22 +188,22 @@ function Gameinit() {
     $(".incorrect-message-1").css("visibility", "hidden")
     if (difficulty == 1) {
         randomColor(4)
-        setTimeout(timer, 7300);
-        setTimeout(activateColors, 7300);
+        setTimeout(timer, 5100);
+        setTimeout(activateColors, 5100);
         highlightColors()
     }
     else {
         randomColor(2)
         highlightColors()
-        setTimeout(timer, 3650);
-        setTimeout(activateColors, 3650);
+        setTimeout(timer, 2600);
+        setTimeout(activateColors, 2600);
     }
 }
 
 //Start next round
 function newRoundInit() {
     deactivateColors()
-    colorHighlightLength = (colors.length + 1) * 1825
+    colorHighlightLength = (colors.length + 1) * 1300
     console.log(colorHighlightLength)
     colorHighlightCount = 0
     turn++
@@ -211,6 +214,7 @@ function newRoundInit() {
     setTimeout(timer, colorHighlightLength);
     setTimeout(activateColors, colorHighlightLength);
     console.log(colors)
+    $(".counter").html(turn)
 }
 
 //Start game button
@@ -255,7 +259,7 @@ function highlightColors() {
             $("div").removeClass("red-highlighted")
             $("div").removeClass("yellow-highlighted")
             $("div").removeClass("green-highlighted")
-        }, 1750)
+        }, 1200)
     }
 }
 

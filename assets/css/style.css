@@ -15,6 +15,8 @@ h1 {
     color: #91d372;
 }
 
+
+
 .title {
     padding: 5px;
     background-color: #575959;
@@ -22,10 +24,9 @@ h1 {
 
 .timer-section {
     margin: 0 auto;
-    width: 60%;
+    width: 90%;
     height: 60px;
-    background-color: #575959;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 9px 12px 0px, rgba(0, 0, 0, 0.19) 0px 9px 21px 0px;
+    background-color: #252626;
 }
 
 .countdown-text {
@@ -43,10 +44,10 @@ h1 {
 
 
 .start-game {
-    line-height: 1.8;
+    display: inline-block;
+    padding: 13px 8px 10px 8px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 9px 12px 0px, rgba(0, 0, 0, 0.19) 0px 9px 21px 0px;
     text-shadow: #00ff00 0 0 1px, #00ff00 1px 1px 10px;
-    height: 60px;
-    width: 100%;
     font-family: Orbitron, cursive;
     font-size: 2em;
     outline: none;
@@ -55,6 +56,24 @@ h1 {
     background-color: #063110;
     color: #0ddc0d;
     border: solid 3px black;
+    width: 250px;
+    text-align: center;
+}
+
+.counter {
+    padding: 13px 8px 10px 8px;
+    text-shadow: #00ff00 0 0 1px, #00ff00 1px 1px 10px;
+    font-family: Orbitron, cursive;
+    font-size: 2em;
+    outline: none;
+    margin-right: 0px;
+    background-color: #063110;
+    color: #0ddc0d;
+    border: solid 3px black;
+    width: 80px;
+    display: inline-block;
+    margin-left: 20px;
+    text-align: center;
 }
 
 .selected-difficulty,
@@ -176,7 +195,7 @@ h1 {
 /*https://codepen.io/jackrugile/pen/ABeIi*/
 
 .green-highlighted {
-    animation: green-glow 750ms ease-out infinite alternate;
+    animation: green-glow 500ms ease-out infinite alternate;
     border-color: #393;
     box-shadow: 0 0 5px rgba(0, 255, 0, .2), inset 0 0 5px rgba(0, 255, 0, .1);
     color: #efe;
@@ -201,7 +220,7 @@ h1 {
 }
 
 .blue-highlighted {
-    animation: blue-glow 750ms ease-out infinite alternate;
+    animation: blue-glow 500ms ease-out infinite alternate;
     border-color: #393;
     box-shadow: 0 0 5px rgba(255, 255, 255, .2), inset 0 0 5px rgba(255, 255, 255, .1);
     color: #efe;
@@ -225,7 +244,7 @@ h1 {
 }
 
 .yellow-highlighted {
-    animation: yellow-glow 750ms ease-out infinite alternate;
+    animation: yellow-glow 500ms ease-out infinite alternate;
     border-color: #f4ff18;
     box-shadow: 0 0 5px rgba(255, 255, 0, .2), inset 0 0 5px rgba(255, 255, 0, .1);
     color: #efe;
@@ -249,7 +268,7 @@ h1 {
 }
 
 .red-highlighted {
-    animation: red-glow 750ms ease-out infinite alternate;
+    animation: red-glow 500ms ease-out infinite alternate;
     border-color: #fc003e;
     box-shadow: 0 0 5px rgba(255, 0, 0, .2), inset 0 0 5px rgba(255, 0, 0, .1);
     color: #efe;
