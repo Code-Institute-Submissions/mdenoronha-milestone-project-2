@@ -1,18 +1,21 @@
+//Color array for random colors to be added
 var colors = [];
+//How many colors in array have been highlighted
 var colorHighlightCount = 0;
+//How long will it take to highlight those colors
 var colorHighlightLength = 0;
+//Timeout variables for timer
 var timeOut;
 var textTimeOut;
+//Time left on timer
 var countdownTimeLeft;
-var CheckedColorNumber = 0;
+//Turn user is currently on i.e. score
 var turn = 0;
+//Which color in array does user have to guess
 var colorNumber = 0;
-
-var countdown
-var activebuttons = []
-
+//Difficulty (initially on easy)
 var difficulty = 2
-
+//Scores from easy-scores.csv/hard-scores.csv
 var hardScores
 var easyScores
 var sounds = ["http://s1download-universal-soundbank.com/mp3/sounds/20840.mp3",
@@ -21,216 +24,37 @@ var sounds = ["http://s1download-universal-soundbank.com/mp3/sounds/20840.mp3",
     "http://s1download-universal-soundbank.com/mp3/sounds/20841.mp3"
 ];
 
-//Load scores on load
+//Load leaderboard scores on load
 loadHardScores()
 loadEasyScores()
 
-//Push a random color to colors a certain number of times
-function randomColor(numOfTimes) {
-    for (i = 0; i < numOfTimes; i++) {
-        var newColor = Math.floor(Math.random() * 4)
-        colors.push(newColor)
-        console.log(colors)
-    }
-    return colors
-}
-
-
-//Click on active tiles, check if correct colour is clicked
-$(document).on('click', '.active', function(e) {
-    checkColor(e)
-    console.log(e)
-});
-
-
-//Reset all variables
-function resetVariables() {
-    turn = 0
-    colorNumber = 0
-    colorHighlightCount = 0
-    colorHighlightLength = 0
-    colors = []
-    $(".table").html("")
-    $(".leaderboard-title").css("display", "none")
-}
-
-//Timer as text
-function countdownReset() {
-    countdownTimeLeft = 3 * difficulty;
-    countdownAsText();
-}
-
-function countdownAsText() {
-    if (countdownTimeLeft > 0) {
-        countdownTimeLeft--;
-        console.log(countdownTimeLeft + 1)
-
-        $(".start-game").html(`TIME LEFT: ${countdownTimeLeft + 1}`)
-
-        if (countdownTimeLeft > 0) {
-            textTimeOut = setTimeout('countdownAsText()', 1000);
-        }
-    }
-}
-// Timer
-function timer() {
-    countdownReset()
-    console.log("Timer start")
-    timeOut = setTimeout(function() {
-        console.log("Timeout")
-        $(".countdown-text").html("")
-        showScoresForm()
-        console.log("Loss")
-        deactivateColors()
-        clearTimeout(timeOut)
-        clearTimeout(textTimeOut)
-        $(".counter").html("0")
-        $(".easy").addClass("active-button")
-        $(".hard").addClass("active-button")
-        $(".start-game").addClass("active-start")
-        $(".show-scores").addClass("active-button")
-        $(".start-game").css("visibility", "visible")
-        $(".start-game").html("PLAY AGAIN")
-        $(".incorrect-message-2").css("visibility", "visible")
-        setTimeout(function() {
-            $(".incorrect-message-2").css("visibility", "hidden")
-        }, 3000)
-    }, 3000 * difficulty);
-}
-
-//Check if color clicked was correct
-function checkColor(e) {
-    //If last color in the array
-    if (colorNumber == colors.length - 1) {
-        //If color is correct
-        if (e.target.id == colors[colorNumber]) {
-            console.log("Win")
-            newRoundInit()
-            clearTimeout(timeOut)
-            clearTimeout(textTimeOut)
-        }
-        //If color is wrong
-        else {
-            //Need to put all below in game over function
-            showScoresForm()
-            console.log("Loss")
-            deactivateColors()
-            clearTimeout(timeOut)
-            clearTimeout(textTimeOut)
-            console.log(colors)
-            $(".counter").html("0")
-            $(".countdown-text").html("")
-            $(".easy").addClass("active-button")
-            $(".hard").addClass("active-button")
-            $(".start-game").addClass("active-start")
-            $(".show-scores").addClass("active-button")
-            $(".start-game").css("visibility", "visible")
-            $(".start-game").html("PLAY AGAIN")
-            $(".incorrect-message-1").css("visibility", "visible")
-            setTimeout(function() {
-                $(".incorrect-message-1").css("visibility", "hidden")
-            }, 3000)
-        }
-    }
-    //If not last color in the array
-    else {
-        //If color is correct
-        if (e.target.id == colors[colorNumber]) {
-            console.log("Win")
-            clearTimeout(timeOut)
-            clearTimeout(textTimeOut)
-            timer()
-            colorNumber++
-            console.log(colors)
-        }
-        //If color is wrong
-        else {
-            showScoresForm()
-            deactivateColors()
-            console.log("Loss")
-            clearTimeout(timeOut)
-            clearTimeout(textTimeOut)
-            console.log(colors)
-            $(".counter").html("0")
-            $(".easy").addClass("active-button")
-            $(".hard").addClass("active-button")
-            $(".start-game").addClass("active-start")
-            $(".show-scores").addClass("active-button")
-            $(".countdown-text").html("")
-            $(".start-game").css("visibility", "visible")
-            $(".start-game").html("PLAY AGAIN")
-            $(".incorrect-message-1").css("visibility", "visible")
-            setTimeout(function() {
-                $(".incorrect-message-1").css("visibility", "hidden")
-            }, 3000)
-        }
-    }
-}
-
-//Make colors active and clickable
-function activateColors() {
-    $(".selector").addClass("active")
-}
-
-//Make colors inactive and not clickable
-function deactivateColors() {
-    $(".selector").removeClass("active")
-}
-
-
-//Start game
+//Start game by resetting all values to their initial point, resetting all HTML to
+//their initial point and running functions to start game
 function Gameinit() {
     resetVariables()
-    $(".easy").removeClass("active-button")
-    $(".hard").removeClass("active-button")
-    $(".show-scores").removeClass("active-button")
-    $(".incorrect-message-2").css("visibility", "hidden")
-    $(".incorrect-message-1").css("visibility", "hidden")
+    deactivateMenuBar()
+    //If hard difficulty is selected
     if (difficulty == 1) {
         randomColor(4)
-        setTimeout(timer, 5100);
-        setTimeout(activateColors, 5100);
+        setTimeout(timer, 4800);
+        setTimeout(activateColors, 4800);
         highlightColors()
     }
+    //If easy difficulty is selected
     else {
         randomColor(2)
         highlightColors()
-        setTimeout(timer, 2600);
-        setTimeout(activateColors, 2600);
+        setTimeout(timer, 2400);
+        setTimeout(activateColors, 2400);
     }
 }
-
-//Start next round
-function newRoundInit() {
-    deactivateColors()
-    colorHighlightLength = (colors.length + 1) * 1300
-    console.log(colorHighlightLength)
-    colorHighlightCount = 0
-    turn++
-    colorNumber = 0
-    clearTimeout(timeOut)
-    randomColor(1)
-    highlightColors()
-    setTimeout(timer, colorHighlightLength);
-    setTimeout(activateColors, colorHighlightLength);
-    console.log(colors)
-    $(".counter").html(turn)
-}
-
-//Start game button
-$(".start-game").on('click', function() {
-    if ($(this).hasClass('active-start')) {
-        resetVariables()
-        Gameinit()
-        $(this).removeClass("active-start")
-    }
-});
-
 
 //Highlight colors at beginning of round
 function highlightColors() {
-    $(".start-game").html(`MEMORISE`)
+    //colorHighlightCount tracks color currently highlighting in colors array
+    //If there are no more colors left to hightlight, function completes
     if (colorHighlightCount < colors.length) {
+        $(".start-game").html(`MEMORISE`)
         if ($("#" + colors[colorHighlightCount]).hasClass("blue")) {
             setTimeout(function() {
                 $("#" + colors[colorHighlightCount]).addClass("blue-highlighted")
@@ -263,24 +87,173 @@ function highlightColors() {
     }
 }
 
-//Difficulty buttons
+//Make menu bar button unselectable
+function deactivateMenuBar() {
+    $(".easy").removeClass("active-button")
+    $(".hard").removeClass("active-button")
+    $(".show-scores").removeClass("active-button")
+}
+
+//Push a random color to colors a certain number of times
+function randomColor(numOfTimes) {
+    for (i = 0; i < numOfTimes; i++) {
+        var newColor = Math.floor(Math.random() * 4)
+        colors.push(newColor)
+    }
+    return colors
+}
+
+//Reset all variables to initial point
+function resetVariables() {
+    turn = 0
+    colorNumber = 0
+    colorHighlightCount = 0
+    colorHighlightLength = 0
+    colors = []
+    $(".table").html("")
+    $(".leaderboard-title").css("display", "none")
+}
+
+//Reset timer to initial point (based on difficulty) and run countdownAsText
+function countdownReset() {
+    countdownTimeLeft = 3 * difficulty;
+    countdownAsText();
+}
+
+//Update the display with the amount of time left on timer
+function countdownAsText() {
+    if (countdownTimeLeft > 0) {
+        countdownTimeLeft--;
+
+        $(".start-game").html(`TIME LEFT: ${countdownTimeLeft + 1}`)
+
+        if (countdownTimeLeft > 0) {
+            textTimeOut = setTimeout('countdownAsText()', 1000);
+        }
+    }
+}
+
+// Timer which ends game at completion
+function timer() {
+    countdownReset()
+    timeOut = setTimeout(function() {
+        gameOver()
+    }, 3000 * difficulty);
+}
+
+//On game over, reset all game functions and HTML to intiial point, and show leaderboard form
+function gameOver() {
+    $(".countdown-text").html("")
+    showScoresForm()
+    deactivateColors()
+    clearTimeout(timeOut)
+    clearTimeout(textTimeOut)
+    $(".counter").html("0")
+    $(".easy").addClass("active-button")
+    $(".hard").addClass("active-button")
+    $(".start-game").addClass("active-start")
+    $(".show-scores").addClass("active-button")
+    $(".start-game").css("visibility", "visible")
+    $(".start-game").html("PLAY AGAIN")
+}
+
+//Check if color clicked on was correct
+function checkColor(e) {
+    //If last color in the array
+    if (colorNumber == colors.length - 1) {
+        //If color is correct
+        if (e.target.id == colors[colorNumber]) {
+            newRoundInit()
+            clearTimeout(timeOut)
+            clearTimeout(textTimeOut)
+        }
+        //If color is wrong
+        else {
+            //Need to put all below in game over function
+            gameOver()
+        }
+    }
+    //If not last color in the array
+    else {
+        //If color is correct
+        if (e.target.id == colors[colorNumber]) {
+            clearTimeout(timeOut)
+            clearTimeout(textTimeOut)
+            timer()
+            //Tracks which color in an array the user has to guess next
+            colorNumber++
+        }
+        //If color is wrong
+        else {
+            gameOver()
+        }
+    }
+}
+
+//Make colors active and clickable in game
+function activateColors() {
+    $(".selector").addClass("active")
+}
+
+//Make colors inactive and not clickable
+function deactivateColors() {
+    $(".selector").removeClass("active")
+}
+
+//Start next round
+function newRoundInit() {
+    clearTimeout(timeOut)
+    //Makes colors not selectable during highlightColors
+    deactivateColors()
+    //Resets how many colors have been highlighted to 0
+    colorHighlightCount = 0
+    //Adds one to the turn the user is currently on
+    turn++
+    //Resets the color the user has to guess to the first in array
+    colorNumber = 0
+    randomColor(1)
+    highlightColors()
+    //How long hightlightColors will take depending on how many colors in array
+    colorHighlightLength = (colors.length) * 1200
+    //Starts timer and allows colors to selectable after highlightColors completed
+    setTimeout(timer, colorHighlightLength);
+    setTimeout(activateColors, colorHighlightLength);
+    $(".counter").html(turn)
+}
+
+
+//Click on active tiles, checkColor runs to check if correct colour is clicked
+$(document).on('click', '.active', function(e) {
+    checkColor(e)
+});
+
+
+//When start button clicked (if not currently playing game), starts game
+$(".start-game").on('click', function() {
+    if ($(this).hasClass('active-start')) {
+        resetVariables()
+        Gameinit()
+        $(this).removeClass("active-start")
+    }
+});
+
+//On clicking easy button (and game is not playing) updates difficulty to 2 and relevant HTML
 $(".easy").on("click", function() {
     if ($(this).hasClass("active-button")) {
         $(".easy").removeClass("not-selected-difficulty").addClass("selected-difficulty")
         $(".hard").removeClass("selected-difficulty").addClass("not-selected-difficulty")
         difficulty = 2
-        console.log(difficulty)
         $(".table").html("")
         $(".leaderboard-title").css("display", "none")
     }
 });
 
+//On clicking easy button (and game is not playing) updates difficulty to 1 and relevant HTML
 $(".hard").on("click", function() {
     if ($(this).hasClass("active-button")) {
         $(".easy").addClass("not-selected-difficulty").removeClass("selected-difficulty")
         $(".hard").addClass("selected-difficulty").removeClass("not-selected-difficulty")
         difficulty = 1
-        console.log(difficulty)
         $(".table").html("")
         $(".leaderboard-title").css("display", "none")
     }
@@ -288,18 +261,7 @@ $(".hard").on("click", function() {
 
 //Leaderboard functionality
 
-//Access score data
-$(".show-scores").on("click", function() {
-    if ($(this).hasClass("active-button")) {
-        $("#myModal").css("display", "block")
-        $(".submit-score").css("display", "none")
-        $(".leaderboard-title").css("display", "none")
-        $(".table").html("")
-        showTable()
-    }
-});
-
-//Load hard scores
+//Load hard scores for leaderboard
 function loadHardScores() {
 
     var xhr = new XMLHttpRequest();
@@ -318,7 +280,7 @@ function loadHardScores() {
     }
 }
 
-//Load easy scores
+//Load easy scores for leaderboard
 function loadEasyScores() {
 
     var xhr = new XMLHttpRequest();
@@ -337,7 +299,31 @@ function loadEasyScores() {
     }
 }
 
-//Show leaderboard
+//Show enter score form on game ending
+function showScoresForm() {
+    //Sorts scores in order for leaderboard
+    hardScores.sort(function(a, b) {
+        return b.score - a.score;
+    });
+    easyScores.sort(function(a, b) {
+        return b.score - a.score;
+    });
+    //If the score the user has gained is more than the lowest score in leaderboard, form appears
+    //If hard
+    if (difficulty == 1) {
+        if (turn > hardScores[9].score) {
+            $("#myModal").css("display", "block")
+        }
+    }
+    //If easy
+    else {
+        if (turn > easyScores[9].score) {
+            $("#myModal").css("display", "block")
+        }
+    }
+}
+
+//Populates leaderboard with data from easy/hard scores
 function showTable() {
     var tablerow = []
 
@@ -350,11 +336,11 @@ function showTable() {
             if (i === 10) {
                 break;
             }
-            console.log(hardScores[i].name)
             tablerow.push(`<tr><td>${i + 1}</td><td>${hardScores[i].name}</td><td>${hardScores[i].score}</td></tr>`)
         }
-        //If easy
-    }
+        
+    } 
+    //If easy
     else {
         $(".leaderboard-title").css("display", "block")
         $(".leaderboard-title").html(`<h2>EASY<br>LEADERBOARD</h2>`)
@@ -363,43 +349,32 @@ function showTable() {
             if (i === 10) {
                 break;
             }
-            console.log(easyScores[i].name)
             tablerow.push(`<tr><td>${i + 1}</td><td>${easyScores[i].name}</td><td>${easyScores[i].score}</td></tr>`)
         }
     }
 
     $(".table").html(tablerow)
-    console.log(tablerow)
 }
 
-//Show enter score form
-function showScoresForm() {
-    hardScores.sort(function(a, b) {
-        return b.score - a.score;
-    });
-    easyScores.sort(function(a, b) {
-        return b.score - a.score;
-    });
-    //If hard
-    if (difficulty == 1) {
-        if (turn > hardScores[9].score) {
-            $("#myModal").css("display", "block")
-        }
+//On clicking leaderboard (not during game) leaderboard is shown
+$(".show-scores").on("click", function() {
+    if ($(this).hasClass("active-button")) {
+        $("#myModal").css("display", "block")
+        $(".submit-score").css("display", "none")
+        $(".leaderboard-title").css("display", "none")
+        $(".table").html("")
+        showTable()
     }
-    else {
-        if (turn > easyScores[9].score) {
-            $("#myModal").css("display", "block")
-        }
-    }
-}
+});
 
-//Submit score
+
+//On clicking submit, users name and score is added to leaderboard (locally, not hardscores.csv/easyscores.csv)
 $(".submit-score").submit(function(event) {
 
     var tempScore = { "score": turn, "name": ($(this).serializeArray())[0].value }
     //If hard
     if (difficulty === 1) {
-        console.log(hardScores)
+        //pushes new score into hardScores for leaderboard
         hardScores.push(tempScore)
         hardScores.sort(function(a, b) {
             return b.score - a.score;
@@ -408,7 +383,7 @@ $(".submit-score").submit(function(event) {
         //If easy
     }
     else {
-        console.log(easyScores)
+        //pushes new score into easyScores for leaderboard
         easyScores.push(tempScore)
         easyScores.sort(function(a, b) {
             return b.score - a.score;
@@ -416,26 +391,18 @@ $(".submit-score").submit(function(event) {
         showTable()
     }
     $(".submit-score").css("display", "none")
-
+    //Prevents page from reloading as score is stored locally
     event.preventDefault();
 });
 
-
-
-//https://www.w3schools.com/howto/howto_css_modals.asp
-
-//Leaderboard pop up
-function leaderboardPopUp() {
-    $("#myModal").css("display", "block")
-}
-
-//Close leaderboard pop up
+//Assistance on pop up provided by https://www.w3schools.com/howto/howto_css_modals.asp
+//Click close button, pop up closes
 $(".close").on("click", function() {
     $("#myModal").css("display", "none")
     $(".submit-score").css("display", "block")
 })
 
-//Close leaderboard pop up
+//Click outside pop up, it closes
 $(window).on("click", function(e) {
     if ($(event.target).hasClass('modal')) {
         $("#myModal").css("display", "none")
