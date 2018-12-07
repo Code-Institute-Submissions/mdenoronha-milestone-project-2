@@ -15,6 +15,10 @@ h1 {
     color: #91d372;
 }
 
+header {
+    height: 10vh;
+}
+
 
 
 .title {
@@ -27,19 +31,19 @@ h1 {
     width: 90%;
     height: 60px;
     background-color: #252626;
+    justify-content: center;
+    display: flex;
 }
 
-.countdown-text {
-    color: white;
-    font-size: 3.5vw;
-}
 
 .game-area {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 660px;
-    height: 89vh;
+    height: 70vh;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
 }
 
 
@@ -49,14 +53,14 @@ h1 {
     box-shadow: rgba(0, 0, 0, 0.2) 0px 9px 12px 0px, rgba(0, 0, 0, 0.19) 0px 9px 21px 0px;
     text-shadow: #00ff00 0 0 1px, #00ff00 1px 1px 10px;
     font-family: Orbitron, cursive;
-    font-size: 2em;
+    font-size: 1.8em;
     outline: none;
     margin-left: 0px;
     margin-right: 0px;
     background-color: #063110;
     color: #0ddc0d;
     border: solid 3px black;
-    width: 250px;
+    width: 50%;
     text-align: center;
 }
 
@@ -70,7 +74,7 @@ h1 {
     background-color: #063110;
     color: #0ddc0d;
     border: solid 3px black;
-    width: 80px;
+    width: 20%;
     display: inline-block;
     margin-left: 20px;
     text-align: center;
@@ -78,18 +82,18 @@ h1 {
 
 .selected-difficulty,
 .not-selected-difficulty {
-    height: 100px;
     width: 15%;
     border: 0;
     font-family: 'Bowlby One SC', cursive;
     font-size: 3vw;
     outline: none;
+    height: 10vh;
 }
 
 .show-scores {
     float: right;
     width: 30%;
-    height: 100px;
+    height: 10vh;
     font-size: 3vw;
     border: 0;
     font-family: 'Bowlby One SC', cursive;
@@ -131,9 +135,9 @@ h1 {
 
 .menu-bar {
     background-color: #575959;
-    height: 100px;
+    height: 10vh;
     width: 100%;
-    bottom: 0;
+    position: absolute;
     margin-top: auto;
 }
 
@@ -143,9 +147,13 @@ h1 {
 
 
 .selector {
-    height: 200px;
-    width: 200px;
+    height: 30vw;
+    width: 30vw;
+    max-width: 30vh;
+    max-height: 30vh;
     margin: 20px;
+    min-width: 200px;
+    min-height: 200px;
 }
 
 .selector {
@@ -161,7 +169,6 @@ h1 {
     position: relative;
     margin: 0 auto;
     background-color: #252626;
-    width: 465px;
     border-radius: 25px;
     box-shadow: 10px 10px 11px -1px #838483;
 }
@@ -195,7 +202,7 @@ h1 {
 /*https://codepen.io/jackrugile/pen/ABeIi*/
 
 .green-highlighted {
-    animation: green-glow 500ms ease-out infinite alternate;
+    animation: green-glow 1200ms ease-out infinite alternate;
     border-color: #393;
     box-shadow: 0 0 5px rgba(0, 255, 0, .2), inset 0 0 5px rgba(0, 255, 0, .1);
     color: #efe;
@@ -220,7 +227,7 @@ h1 {
 }
 
 .blue-highlighted {
-    animation: blue-glow 500ms ease-out infinite alternate;
+    animation: blue-glow 1200ms ease-out infinite alternate;
     border-color: #393;
     box-shadow: 0 0 5px rgba(255, 255, 255, .2), inset 0 0 5px rgba(255, 255, 255, .1);
     color: #efe;
@@ -244,7 +251,7 @@ h1 {
 }
 
 .yellow-highlighted {
-    animation: yellow-glow 500ms ease-out infinite alternate;
+    animation: yellow-glow 1200ms ease-out infinite alternate;
     border-color: #f4ff18;
     box-shadow: 0 0 5px rgba(255, 255, 0, .2), inset 0 0 5px rgba(255, 255, 0, .1);
     color: #efe;
@@ -268,7 +275,7 @@ h1 {
 }
 
 .red-highlighted {
-    animation: red-glow 500ms ease-out infinite alternate;
+    animation: red-glow 1200ms ease-out infinite alternate;
     border-color: #fc003e;
     box-shadow: 0 0 5px rgba(255, 0, 0, .2), inset 0 0 5px rgba(255, 0, 0, .1);
     color: #efe;
