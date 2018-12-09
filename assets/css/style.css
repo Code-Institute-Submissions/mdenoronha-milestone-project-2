@@ -11,7 +11,7 @@ h1 {
     margin-bottom: 0px;
     margin-top: 0px;
     padding-left: 10px;
-    font-size: 3em;
+    font-size: 5vh;
     color: #91d372;
 }
 
@@ -40,20 +40,25 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 660px;
+    min-height: 500px;
     height: 70vh;
     margin-top: 5vh;
     margin-bottom: 5vh;
 }
 
+.start-game:not(.active-start) {
+    cursor: auto;
+}
+
 
 .start-game {
+    cursor: pointer;
     display: inline-block;
-    padding: 13px 8px 10px 8px;
+    padding: 17px 5px 0 5px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 9px 12px 0px, rgba(0, 0, 0, 0.19) 0px 9px 21px 0px;
     text-shadow: #00ff00 0 0 1px, #00ff00 1px 1px 10px;
     font-family: Orbitron, cursive;
-    font-size: 1.8em;
+    font-size: 1.5em;
     outline: none;
     margin-left: 0px;
     margin-right: 0px;
@@ -65,10 +70,10 @@ header {
 }
 
 .counter {
-    padding: 13px 8px 10px 8px;
+    padding-top: 17px;
     text-shadow: #00ff00 0 0 1px, #00ff00 1px 1px 10px;
     font-family: Orbitron, cursive;
-    font-size: 2em;
+    font-size: 1.5em;
     outline: none;
     margin-right: 0px;
     background-color: #063110;
@@ -91,6 +96,7 @@ header {
 }
 
 .show-scores {
+    cursor: pointer;
     float: right;
     width: 30%;
     height: 10vh;
@@ -106,6 +112,7 @@ header {
 .hard:not(.active-button),
 .show-scores:not(.active-button) {
     opacity: 0.3;
+    cursor: auto;
 }
 
 .easy {
@@ -124,6 +131,7 @@ header {
 
 
 .selected-difficulty {
+    cursor: pointer;
     color: #91d372;
     background-color: #004a14;
 }
@@ -147,13 +155,14 @@ header {
 
 
 .selector {
+    cursor: pointer;
     height: 30vw;
     width: 30vw;
-    max-width: 30vh;
-    max-height: 30vh;
+    max-width: 20vh;
+    max-height: 20vh;
     margin: 20px;
-    min-width: 200px;
-    min-height: 200px;
+    min-width: 170px;
+    min-height: 170px;
 }
 
 .selector {
@@ -345,6 +354,7 @@ header {
     z-index: 3;
     margin-top: 100px;
     width: 80%;
+    border-radius: 15px;
     /* Could be more or less, depending on screen size */
 }
 
@@ -355,6 +365,7 @@ header {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    margin-right: 10px;
 }
 
 .close:hover,
@@ -408,19 +419,21 @@ input[name="hardNameSubmit"] {
     outline: none;
     text-transform: uppercase;
     vertical-align: middle;
+    border-radius: 0 0 0 15px;
 }
 
 .submit-button {
     border: none;
     width: 25%;
     vertical-align: middle;
-    height: 100px;
+    height: 101px;
     background-color: #f6e4e9;
     color: #00874a;
     font-family: 'Bowlby One SC', cursive;
     float: right;
     padding: 0;
     font-size: 3vw;
+    border-radius: 0 0 15px 0;
 }
 
 .leaderboard-title {

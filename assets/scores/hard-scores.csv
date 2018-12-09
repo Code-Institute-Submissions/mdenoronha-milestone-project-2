@@ -1,47 +1,37 @@
-[
-  {
-    "score": 0,
-    "name": "FrankA"
-  },
-  {
-    "score": 0,
-    "name": "FrankA"
-  },
-  {
-    "score": 0,
-    "name": "FrankA"
-  },
-  {
-    "score": 5,
-    "name": "FrankB"
-  },
-  {
-    "score": 120,
-    "name": "FrankC"
-  },
-  {
-    "score": 31,
-    "name": "FrankA"
-  },
-  {
-    "score": 52,
-    "name": "FrankB"
-  },
-  {
-    "score": 10,
-    "name": "FrankC"
-  },
-  {
-    "score": 13,
-    "name": "FrankA"
-  },
-   {
-    "score": 13,
-    "name": "FrankA"
-  },
-   {
-    "score": 13,
-    "name": "FrankA"
-  }
-
-]
+[{
+  "score": 11,
+  "name": "Skyler"
+}, {
+  "score": 1,
+  "name": "Rosabelle"
+}, {
+  "score": 17,
+  "name": "Antonin"
+}, {
+  "score": 12,
+  "name": "Frederik"
+}, {
+  "score": 11,
+  "name": "Lacey"
+}, {
+  "score": 13,
+  "name": "Zondra"
+}, {
+  "score": 3,
+  "name": "Hugh"
+}, {
+  "score": 1,
+  "name": "Marne"
+}, {
+  "score": 14,
+  "name": "Etti"
+}, {
+  "score": 2,
+  "name": "Leslie"
+}, {
+  "score": 18,
+  "name": "Blanche"
+}, {
+  "score": 1,
+  "name": "Agatha"
+}]

@@ -215,7 +215,7 @@ function newRoundInit() {
     highlightColors()
     //How long hightlightColors will take depending on how many colors in array
     colorHighlightLength = (colors.length) * 1200
-    //Starts timer and allows colors to selectable after highlightColors completed
+    //Starts timer and allows colors to be selectable after highlightColors completed
     setTimeout(timer, colorHighlightLength);
     setTimeout(activateColors, colorHighlightLength);
     $(".counter").html(turn)
@@ -312,15 +312,41 @@ function showScoresForm() {
     //If hard
     if (difficulty == 1) {
         if (turn > hardScores[9].score) {
-            $("#myModal").css("display", "block")
+            $(".modal").css("display", "block")
         }
     }
     //If easy
     else {
         if (turn > easyScores[9].score) {
-            $("#myModal").css("display", "block")
+            $(".modal").css("display", "block")
         }
     }
+}
+
+//Users name and score is added to leaderboard (locally, not hardscores.csv or easyscores.csv)
+function submitScores(event) {
+    var tempScore = { "score": turn, "name": ($(this).serializeArray())[0].value }
+    //If hard
+    if (difficulty === 1) {
+        //pushes new score into hardScores for leaderboard
+        hardScores.push(tempScore)
+        hardScores.sort(function(a, b) {
+            return b.score - a.score;
+        });
+        showTable()
+        //If easy
+    }
+    else {
+        //pushes new score into easyScores for leaderboard
+        easyScores.push(tempScore)
+        easyScores.sort(function(a, b) {
+            return b.score - a.score;
+        });
+        showTable()
+    }
+    $(".submit-score").css("display", "none")
+    //Prevents page from reloading as score is stored locally
+    event.preventDefault();
 }
 
 //Populates leaderboard with data from easy/hard scores
@@ -359,7 +385,7 @@ function showTable() {
 //On clicking leaderboard (not during game) leaderboard is shown
 $(".show-scores").on("click", function() {
     if ($(this).hasClass("active-button")) {
-        $("#myModal").css("display", "block")
+        $(".modal").css("display", "block")
         $(".submit-score").css("display", "none")
         $(".leaderboard-title").css("display", "none")
         $(".table").html("")
@@ -368,44 +394,20 @@ $(".show-scores").on("click", function() {
 });
 
 
-//On clicking submit, users name and score is added to leaderboard (locally, not hardscores.csv/easyscores.csv)
-$(".submit-score").submit(function(event) {
-
-    var tempScore = { "score": turn, "name": ($(this).serializeArray())[0].value }
-    //If hard
-    if (difficulty === 1) {
-        //pushes new score into hardScores for leaderboard
-        hardScores.push(tempScore)
-        hardScores.sort(function(a, b) {
-            return b.score - a.score;
-        });
-        showTable()
-        //If easy
-    }
-    else {
-        //pushes new score into easyScores for leaderboard
-        easyScores.push(tempScore)
-        easyScores.sort(function(a, b) {
-            return b.score - a.score;
-        });
-        showTable()
-    }
-    $(".submit-score").css("display", "none")
-    //Prevents page from reloading as score is stored locally
-    event.preventDefault();
-});
+//On clicking submit, users name and score is added to leaderboard (locally, not hardscores.csv or easyscores.csv)
+$(".submit-score").submit(submitScores)
 
 //Assistance on pop up provided by https://www.w3schools.com/howto/howto_css_modals.asp
 //Click close button, pop up closes
 $(".close").on("click", function() {
-    $("#myModal").css("display", "none")
+    $(".modal").css("display", "none")
     $(".submit-score").css("display", "block")
 })
 
 //Click outside pop up, it closes
 $(window).on("click", function(e) {
     if ($(event.target).hasClass('modal')) {
-        $("#myModal").css("display", "none")
+        $(".modal").css("display", "none")
         $(".submit-score").css("display", "block")
     }
 })

@@ -1,47 +1,37 @@
-[
-  {
-    "score": 0,
-    "name": "MikeA"
-  },
-  {
-    "score": 0,
-    "name": "MikeA"
-  },
-  {
-    "score": 0,
-    "name": "MikeA"
-  },
-  {
-    "score": 5,
-    "name": "MikeB"
-  },
-  {
-    "score": 120,
-    "name": "MikeC"
-  },
-  {
-    "score": 31,
-    "name": "MikeA"
-  },
-  {
-    "score": 52,
-    "name": "MikeB"
-  },
-  {
-    "score": 10,
-    "name": "MikeC"
-  },
-  {
-    "score": 13,
-    "name": "MikeA"
-  },
-   {
-    "score": 13,
-    "name": "MikeA"
-  },
-   {
-    "score": 13,
-    "name": "MikeA"
-  }
-
-]
+[{
+  "score": 11,
+  "name": "Barthel"
+}, {
+  "score": 10,
+  "name": "Jared"
+}, {
+  "score": 11,
+  "name": "Reina"
+}, {
+  "score": 1,
+  "name": "Ginevra"
+}, {
+  "score": 5,
+  "name": "Naomi"
+}, {
+  "score": 13,
+  "name": "Husain"
+}, {
+  "score": 1,
+  "name": "Kimble"
+}, {
+  "score": 3,
+  "name": "Jodi"
+}, {
+  "score": 14,
+  "name": "Alleen"
+}, {
+  "score": 12,
+  "name": "Heda"
+}, {
+  "score": 1,
+  "name": "Aguie"
+}, {
+  "score": 12,
+  "name": "Camila"
+}]

@@ -2,9 +2,12 @@ var colorArray
 var colorLoopCount = 0
 var checkedColorNumber
 var colorNumber
+var colorHighlightCount
+var difficulty
+var turn
 
-describe("Simon Game", function() {
-    describe("Number generator", function() {
+describe("Number generator", function() {
+    describe("Random colors inputted into colors array", function() {
         colorArray = randomColor(3)
 
         //Check randomColors() produces an array of the length of the variable inputted
@@ -112,3 +115,136 @@ describe("Appropriate functions should run based on user's guess", function() {
         })
     })
 })
+
+
+// // Assistance from jasmine-jquery docs https://github.com/velesin/jasmine-jquery
+// function createHTMLFixture() {
+//     setFixtures('<div id="0" class="blue selector"></div>' +
+//         '<div id="myModal" class="modal"></div>'
+//     );
+// }
+
+beforeEach(function() {
+    jasmine.getStyleFixtures().fixturesPath = './assets/css';
+    loadStyleFixtures('style.css');
+    jasmine.getFixtures().fixturesPath = '.';
+    loadFixtures('/index.html')
+})
+
+describe('Color highlight function called', function() {
+    describe('Blue selector to be highlighted', function() {
+
+        // beforeEach(function() {
+        //     createHTMLFixture();
+        // })
+
+        beforeEach(function() {
+            jasmine.clock().install();
+        });
+
+        afterEach(function() {
+            jasmine.clock().uninstall();
+        });
+
+        it('it should not have class blue-highlighted for 299 milliseconds', function() {
+            //Color blue is in color array
+            colors = [0]
+            //No colors have yet been highlighted
+            colorHighlightCount = 0
+            highlightColors()
+
+            expect($('#0')).not.toHaveClass("blue-highlighted")
+
+            jasmine.clock().tick(299);
+
+            expect($('#0')).not.toHaveClass("blue-highlighted")
+
+
+        });
+
+        it('it should have class blue-highlighted between 300 and 1199 milliseconds', function() {
+            //Color blue is in color array
+            colors = [0]
+            //No colors have yet been highlighted
+            colorHighlightCount = 0
+            highlightColors()
+
+            //300 milliseconds
+            jasmine.clock().tick(301);
+
+            expect($('#0')).toHaveClass("blue-highlighted")
+
+            //1199 milliseconds
+            jasmine.clock().tick(898);
+
+            expect($('#0')).toHaveClass("blue-highlighted")
+
+            //1200 milliseconds
+            jasmine.clock().tick(1);
+
+            expect($('#0')).not.toHaveClass("blue-highlighted")
+        });
+    });
+});
+
+describe("Game is running", function() {
+    describe("User does not guess within timer", function() {
+
+        beforeEach(function() {
+            jasmine.clock().install();
+        });
+
+        afterEach(function() {
+            jasmine.clock().uninstall();
+        });
+
+        it("on easy, gameOver should run after 6 seconds", function() {
+            //Easy difficulty selected
+            difficulty = 2
+            timer()
+            spyOn(window, 'gameOver')
+            expect(window.gameOver).not.toHaveBeenCalled()
+
+            jasmine.clock().tick(6001);
+
+            expect(window.gameOver).toHaveBeenCalled()
+
+        })
+
+        it("on hard, gameOver should run after 3 seconds", function() {
+            //Hard difficulty selected
+            difficulty = 1
+            timer()
+            spyOn(window, 'gameOver')
+            expect(window.gameOver).not.toHaveBeenCalled()
+
+            jasmine.clock().tick(3001);
+
+            expect(window.gameOver).toHaveBeenCalled()
+
+        })
+
+    })
+})
+
+
+describe("Modal appears on end of game", function() {
+    describe("Easy mode, user scores in top ten results", function() {
+
+        it("modal should appear", function() {
+
+            //Difficulty easy
+            difficulty == 2
+            loadHardScores()
+            //User scored in top 10
+            turn = hardScores[9].score + 1
+            //Fix this
+            expect($("#myModal").toHaveCss({ display: "block" }))
+
+        })
+    })
+})
+
+
+//modal appears if score is leadboard worthy
+//User entered into correct area of table based on score
