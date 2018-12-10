@@ -4,6 +4,8 @@ var colors = [];
 var colorHighlightCount = 0;
 //How long will it take to highlight those colors
 var colorHighlightLength = 0;
+//How long the highlight should last (depending on difficulty)
+var highlightedTime
 //Timeout variables for timer
 var timeOut;
 var textTimeOut;
@@ -18,15 +20,32 @@ var difficulty = 2
 //Scores from easy-scores.csv/hard-scores.csv
 var hardScores
 var easyScores
-var sounds = ["http://s1download-universal-soundbank.com/mp3/sounds/20840.mp3",
-    "http://s1download-universal-soundbank.com/mp3/sounds/20848.mp3",
-    "http://s1download-universal-soundbank.com/mp3/sounds/20842.mp3",
-    "http://s1download-universal-soundbank.com/mp3/sounds/20841.mp3"
-];
+var sound0 = new Audio();
+sound0.src = "http://s1download-universal-soundbank.com/mp3/sounds/20839.mp3";
+var sound1 = new Audio();
+sound1.src = "http://s1download-universal-soundbank.com/mp3/sounds/20844.mp3";
+var sound2 = new Audio();
+sound2.src = "http://s1download-universal-soundbank.com/mp3/sounds/20842.mp3";
+var sound3 = new Audio();
+sound3.src = "http://s1download-universal-soundbank.com/mp3/sounds/20841.mp3";
+var leaderboardSound = new Audio()
+leaderboardSound.src = "http://s1download-universal-soundbank.com/mp3/sounds/20843.mp3";
+var gameOverSound = new Audio()
+gameOverSound.src = "http://s1download-universal-soundbank.com/mp3/sounds/20853.mp3";
+var sounds = [sound0, sound1, sound2, sound3]
+
 
 //Load leaderboard scores on load
 loadHardScores()
 loadEasyScores()
+
+function playAudio() {
+    var green = new Audio();
+    green.src = "http://s1download-universal-soundbank.com/mp3/sounds/20848.mp3";
+
+    green.play()
+}
+
 
 //Start game by resetting all values to their initial point, resetting all HTML to
 //their initial point and running functions to start game
@@ -35,17 +54,19 @@ function Gameinit() {
     deactivateMenuBar()
     //If hard difficulty is selected
     if (difficulty == 1) {
+        highlightedTime = 700
         randomColor(4)
-        setTimeout(timer, 4800);
-        setTimeout(activateColors, 4800);
+        setTimeout(timer, 700 * 4);
+        setTimeout(activateColors, 700 * 4);
         highlightColors()
     }
     //If easy difficulty is selected
     else {
+        highlightedTime = 900
         randomColor(2)
         highlightColors()
-        setTimeout(timer, 2400);
-        setTimeout(activateColors, 2400);
+        setTimeout(timer, highlightedTime * 2);
+        setTimeout(activateColors, highlightedTime * 2);
     }
 }
 
@@ -58,21 +79,25 @@ function highlightColors() {
         if ($("#" + colors[colorHighlightCount]).hasClass("blue")) {
             setTimeout(function() {
                 $("#" + colors[colorHighlightCount]).addClass("blue-highlighted")
+                sounds[colors[colorHighlightCount]].play()
             }, 300)
         }
         else if ($("#" + colors[colorHighlightCount]).hasClass("red")) {
             setTimeout(function() {
                 $("#" + colors[colorHighlightCount]).addClass("red-highlighted")
+                sounds[colors[colorHighlightCount]].play()
             }, 300)
         }
         else if ($("#" + colors[colorHighlightCount]).hasClass("green")) {
             setTimeout(function() {
                 $("#" + colors[colorHighlightCount]).addClass("green-highlighted")
+                sounds[colors[colorHighlightCount]].play()
             }, 300)
         }
         else if ($("#" + colors[colorHighlightCount]).hasClass("yellow")) {
             setTimeout(function() {
                 $("#" + colors[colorHighlightCount]).addClass("yellow-highlighted")
+                sounds[colors[colorHighlightCount]].play()
             }, 300)
         }
 
@@ -83,7 +108,7 @@ function highlightColors() {
             $("div").removeClass("red-highlighted")
             $("div").removeClass("yellow-highlighted")
             $("div").removeClass("green-highlighted")
-        }, 1200)
+        }, highlightedTime)
     }
 }
 
@@ -214,7 +239,7 @@ function newRoundInit() {
     randomColor(1)
     highlightColors()
     //How long hightlightColors will take depending on how many colors in array
-    colorHighlightLength = (colors.length) * 1200
+    colorHighlightLength = (colors.length) * highlightedTime
     //Starts timer and allows colors to be selectable after highlightColors completed
     setTimeout(timer, colorHighlightLength);
     setTimeout(activateColors, colorHighlightLength);
@@ -313,12 +338,18 @@ function showScoresForm() {
     if (difficulty == 1) {
         if (turn > hardScores[9].score) {
             $(".modal").css("display", "block")
+            leaderboardSound.play()
+        } else {
+            gameOverSound.play()
         }
     }
     //If easy
     else {
         if (turn > easyScores[9].score) {
             $(".modal").css("display", "block")
+            leaderboardSound.play()
+        } else {
+            gameOverSound.play()
         }
     }
 }
@@ -364,8 +395,8 @@ function showTable() {
             }
             tablerow.push(`<tr><td>${i + 1}</td><td>${hardScores[i].name}</td><td>${hardScores[i].score}</td></tr>`)
         }
-        
-    } 
+
+    }
     //If easy
     else {
         $(".leaderboard-title").css("display", "block")
