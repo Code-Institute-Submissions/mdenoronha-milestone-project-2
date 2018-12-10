@@ -39,13 +39,6 @@ var sounds = [sound0, sound1, sound2, sound3]
 loadHardScores()
 loadEasyScores()
 
-function playAudio() {
-    var green = new Audio();
-    green.src = "http://s1download-universal-soundbank.com/mp3/sounds/20848.mp3";
-
-    green.play()
-}
-
 
 //Start game by resetting all values to their initial point, resetting all HTML to
 //their initial point and running functions to start game
@@ -79,26 +72,34 @@ function highlightColors() {
         if ($("#" + colors[colorHighlightCount]).hasClass("blue")) {
             setTimeout(function() {
                 $("#" + colors[colorHighlightCount]).addClass("blue-highlighted")
-                sounds[colors[colorHighlightCount]].play()
             }, 300)
+            setTimeout(function() {
+                sounds[colors[colorHighlightCount]].play()
+            }, 500)
         }
         else if ($("#" + colors[colorHighlightCount]).hasClass("red")) {
             setTimeout(function() {
                 $("#" + colors[colorHighlightCount]).addClass("red-highlighted")
-                sounds[colors[colorHighlightCount]].play()
             }, 300)
+            setTimeout(function() {
+                sounds[colors[colorHighlightCount]].play()
+            }, 500)
         }
         else if ($("#" + colors[colorHighlightCount]).hasClass("green")) {
             setTimeout(function() {
                 $("#" + colors[colorHighlightCount]).addClass("green-highlighted")
-                sounds[colors[colorHighlightCount]].play()
             }, 300)
+            setTimeout(function() {
+                sounds[colors[colorHighlightCount]].play()
+            }, 500)
         }
         else if ($("#" + colors[colorHighlightCount]).hasClass("yellow")) {
             setTimeout(function() {
                 $("#" + colors[colorHighlightCount]).addClass("yellow-highlighted")
-                sounds[colors[colorHighlightCount]].play()
             }, 300)
+            setTimeout(function() {
+                sounds[colors[colorHighlightCount]].play()
+            }, 500)
         }
 
         setTimeout(function() {
@@ -191,6 +192,7 @@ function checkColor(e) {
             newRoundInit()
             clearTimeout(timeOut)
             clearTimeout(textTimeOut)
+            sounds[e.target.id].play()
         }
         //If color is wrong
         else {
@@ -205,6 +207,7 @@ function checkColor(e) {
             clearTimeout(timeOut)
             clearTimeout(textTimeOut)
             timer()
+            sounds[e.target.id].play()
             //Tracks which color in an array the user has to guess next
             colorNumber++
         }
@@ -339,7 +342,8 @@ function showScoresForm() {
         if (turn > hardScores[9].score) {
             $(".modal").css("display", "block")
             leaderboardSound.play()
-        } else {
+        }
+        else {
             gameOverSound.play()
         }
     }
@@ -348,7 +352,8 @@ function showScoresForm() {
         if (turn > easyScores[9].score) {
             $(".modal").css("display", "block")
             leaderboardSound.play()
-        } else {
+        }
+        else {
             gameOverSound.play()
         }
     }
@@ -356,6 +361,8 @@ function showScoresForm() {
 
 //Users name and score is added to leaderboard (locally, not hardscores.csv or easyscores.csv)
 function submitScores(event) {
+    console.log(event)
+
     var tempScore = { "score": turn, "name": ($(this).serializeArray())[0].value }
     //If hard
     if (difficulty === 1) {
