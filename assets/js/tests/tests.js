@@ -228,6 +228,19 @@ describe("Game is running", function() {
     })
 })
 
+var string = "";
+
+//https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
+function randomString() {
+
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 5; i++)
+        string += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return string;
+}
+
 
 describe("Modal appears on end of game", function() {
     describe("Easy mode, user scores in top ten results", function() {
@@ -249,9 +262,18 @@ describe("Modal appears on end of game", function() {
             //Difficulty easy
             difficulty == 2
             loadEasyScores()
-            var event = [{"value": 5}]
-            submitScores(event);
+            randomString()
+            spyOn(window, 'submitScores')
+            turn = easyScores[2].score + 1
 
+            var form = $(".submit-score")
+            form.val(string)
+            var submitCallback = jasmine.createSpy().andReturn(false);
+            form.submit(submitCallback)
+
+            console.log(easyScores)
+            expect(window.submitScores).toHaveBeenCalled()
+            expect($(".table tr:nth-child(2) td:nth-child(2)")).toHaveHtml(string)
         })
     })
 })
