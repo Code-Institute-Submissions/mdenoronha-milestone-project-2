@@ -128,7 +128,7 @@ beforeEach(function() {
     jasmine.getStyleFixtures().fixturesPath = './assets/css';
     loadStyleFixtures('style.css');
     jasmine.getFixtures().fixturesPath = '.';
-    loadFixtures('/index.html')
+    loadFixtures('index.html')
 })
 
 describe('Color highlight function called', function() {
@@ -162,11 +162,12 @@ describe('Color highlight function called', function() {
 
         });
 
-        it('it should have class blue-highlighted between 300 and 1199 milliseconds', function() {
+        it('it should have class blue-highlighted between 300 and 899 milliseconds (difficulty easy)', function() {
             //Color blue is in color array
             colors = [0]
             //No colors have yet been highlighted
             colorHighlightCount = 0
+            highlightedTime = 900
             highlightColors()
 
             //300 milliseconds
@@ -174,12 +175,12 @@ describe('Color highlight function called', function() {
 
             expect($('#0')).toHaveClass("blue-highlighted")
 
-            //1199 milliseconds
-            jasmine.clock().tick(898);
+            //899 milliseconds
+            jasmine.clock().tick(598);
 
             expect($('#0')).toHaveClass("blue-highlighted")
 
-            //1200 milliseconds
+            //900 milliseconds
             jasmine.clock().tick(1);
 
             expect($('#0')).not.toHaveClass("blue-highlighted")
@@ -235,16 +236,26 @@ describe("Modal appears on end of game", function() {
 
             //Difficulty easy
             difficulty == 2
-            loadHardScores()
+            loadEasyScores()
             //User scored in top 10
-            turn = hardScores[9].score + 1
+            turn = easyScores[9].score + 1
             //Fix this
             expect($("#myModal").toHaveCss({ display: "block" }))
+        })
+    })
+
+    describe("On submit, user is entered into correct area of leaderboard", function() {
+        it("user is third", function() {
+            //Difficulty easy
+            difficulty == 2
+            loadEasyScores()
+            var event = [{"value": 5}]
+            submitScores(event);
 
         })
     })
 })
 
 
-//modal appears if score is leadboard worthy
+
 //User entered into correct area of table based on score
