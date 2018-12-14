@@ -73,6 +73,7 @@ Functionality
 Testing
 ---------------
 ### Testing through Jasmine ###
+Jasmine testing document can be found [here](https://simon-game-gibsy92.c9users.io/test.html)
 Test  | Status
 ------------- | -------------
 Running function randomColor with input of 3 creates an array with length 3 | Successful
@@ -143,7 +144,7 @@ By not submitting form, no changes are made to the hard leaderboard | Successful
 
 Deployment
 ---------------
-Project has been deployed to GitHub Pages and is accessible [here](https://mdenoronha.github.io/milestone-project-2/)
+Project has been deployed to GitHub Pages and is accessible [here](https://mdenoronha.github.io/milestone-project-2/).
 The process for deployment was as follows: 
 * Project pushed to GitHub repository
 * Navigated to Settings in relevant GitHub repository
