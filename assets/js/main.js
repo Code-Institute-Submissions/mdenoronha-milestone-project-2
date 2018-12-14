@@ -42,7 +42,7 @@ loadEasyScores()
 
 //Start game by resetting all values to their initial point, resetting all HTML to
 //their initial point and running functions to start game
-function Gameinit() {
+function gameInit() {
     resetVariables()
     deactivateMenuBar()
     //If hard difficulty is selected
@@ -260,7 +260,7 @@ $(document).on('click', '.active', function(e) {
 $(".start-game").on('click', function() {
     if ($(this).hasClass('active-start')) {
         resetVariables()
-        Gameinit()
+        gameInit()
         $(this).removeClass("active-start")
     }
 });
@@ -361,7 +361,6 @@ function showScoresForm() {
 
 //Users name and score is added to leaderboard (locally, not hardscores.csv or easyscores.csv)
 function submitScores(event) {
-    console.log(event)
 
     var tempScore = { "score": turn, "name": ($(this).serializeArray())[0].value }
     //If hard
