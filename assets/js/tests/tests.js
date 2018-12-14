@@ -17,11 +17,11 @@ describe("Number generator", function() {
 
         //with random numbers between 0 and 3
         function testColorNumbers(i) {
-            it("should be between 0 and 4", function() {
+            it("should be between 0 and 3", function() {
                 //Why doesn't this work?
                 expect(colorArray[colorLoopCount]).toBeLessThanOrEqual(3);
             })
-            it("should be between 0 and 4", function() {
+            it("should be between 0 and 3", function() {
                 expect(colorArray[0]).toBeGreaterThanOrEqual(0);
             })
         }
@@ -118,11 +118,6 @@ describe("Appropriate functions should run based on user's guess", function() {
 
 
 // // Assistance from jasmine-jquery docs https://github.com/velesin/jasmine-jquery
-// function createHTMLFixture() {
-//     setFixtures('<div id="0" class="blue selector"></div>' +
-//         '<div id="myModal" class="modal"></div>'
-//     );
-// }
 
 beforeEach(function() {
     jasmine.getStyleFixtures().fixturesPath = './assets/css';
@@ -228,56 +223,31 @@ describe("Game is running", function() {
     })
 })
 
-var string = "";
-
-//https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
-function randomString() {
-
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for (var i = 0; i < 5; i++)
-        string += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return string;
-}
-
-
 describe("Modal appears on end of game", function() {
     describe("Easy mode, user scores in top ten results", function() {
 
-        it("modal should appear", function() {
+        it("user scored in top 10, modal should appear", function() {
 
             //Difficulty easy
             difficulty == 2
             loadEasyScores()
             //User scored in top 10
             turn = easyScores[9].score + 1
-            //Fix this
-            expect($("#myModal").toHaveCss({ display: "block" }))
+            showScoresForm()
+            expect($(".modal")).toHaveCss({display: "block"})
         })
-    })
+        it("user did not score in top 10, modal should not appear", function() {
 
-    describe("On submit, user is entered into correct area of leaderboard", function() {
-        it("user is third", function() {
             //Difficulty easy
             difficulty == 2
             loadEasyScores()
-            randomString()
-            spyOn(window, 'submitScores')
-            turn = easyScores[2].score + 1
-
-            var form = $(".submit-score")
-            form.val(string)
-            var submitCallback = jasmine.createSpy().andReturn(false);
-            form.submit(submitCallback)
-
-            console.log(easyScores)
-            expect(window.submitScores).toHaveBeenCalled()
-            expect($(".table tr:nth-child(2) td:nth-child(2)")).toHaveHtml(string)
+            //User did not score in top 10
+            turn = easyScores[9].score - 1
+            showScoresForm()
+            expect($(".modal")).not.toHaveCss({display: "block"})
         })
     })
 })
 
 
 
-//User entered into correct area of table based on score
