@@ -72,8 +72,9 @@ Functionality
 
 Testing
 ---------------
-### Testing through Jasmine ###
 Jasmine testing document can be found [here](https://mdenoronha.github.io/milestone-project-2/test.html)
+
+### Testing through Jasmine ###
 Test  | Status
 ------------- | -------------
 Running function randomColor with input of 3 creates an array with length 3 | Successful
