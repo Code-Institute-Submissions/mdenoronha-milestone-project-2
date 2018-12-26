@@ -242,7 +242,7 @@ header {
 @keyframes green-glow {
     0% {
         border-color: #393;
-        box-shadow: 50 50 120px rgba(0, 255, 0, 0), inset 50 50 5px rgba(0, 255, 0, 0);
+        box-shadow: 50px 50px 120px rgba(0, 255, 0, 0), inset 50px 50px 5px rgba(0, 255, 0, 0);
     }
     100% {
         border-color: #6f6;
@@ -290,7 +290,7 @@ header {
 @keyframes yellow-glow {
     0% {
         border-color: #f4ff18;
-        box-shadow: 50 50 120px rgba(255, 255, 0, 0), inset 50 50 5px rgba(255, 255, 0, 0);
+        box-shadow: 50px 50px 120px rgba(255, 255, 0, 0), inset 50px 50px 5px rgba(255, 255, 0, 0);
     }
     100% {
         border-color: #f4ff18;
@@ -314,7 +314,7 @@ header {
 @keyframes red-glow {
     0% {
         border-color: #fc003e;
-        box-shadow: 50 50 120px rgba(255, 0, 0, 0), inset 50 50 5px rgba(255, 0, 0, 0);
+        box-shadow: 50px 50px 120px rgba(255, 0, 0, 0), inset 50px 50px 5px rgba(255, 0, 0, 0);
     }
     100% {
         border-color: #fc003e;
