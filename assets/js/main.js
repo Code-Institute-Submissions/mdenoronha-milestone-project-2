@@ -143,7 +143,7 @@ function highlightColors() {
         }
 
         setTimeout(function() {
-            colorHighlightCount++
+            colorHighlightCount++;
             highlightColors();
             $("div").removeClass("blue-highlighted");
             $("div").removeClass("red-highlighted");
