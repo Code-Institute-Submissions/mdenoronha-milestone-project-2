@@ -125,7 +125,6 @@ header {
 }
 
 
-
 .hard.not-selected-difficulty {
     color: #9fa79a;
     background-size: 200% 100%;
@@ -145,7 +144,6 @@ header {
     transition: background-position 1s;
     background-position: 0% 0%;
 }
-
 
 
 .easy.not-selected-difficulty {
@@ -223,7 +221,7 @@ header {
     border-radius: 25px;
 }
 
-/*Assistance from https://codepen.io/jackrugile/pen/ABeIi for glow effect*/
+/*Assistance from anon at https://codepen.io/jackrugile/pen/ABeIi for glow effect*/
 
 .green-highlighted {
     animation: green-glow 1200ms ease-out infinite alternate;
@@ -263,7 +261,7 @@ header {
     background-color: #00ebff;
 }
 
-@keyframes blue-glow {
+@keyframes blue-glow { 
     0% {
         border-color: #3afffc;
         box-shadow: 0 0 120px rgba(0, 231, 255, 0), inset 0 0 5px rgba(0, 231, 255, .0);
