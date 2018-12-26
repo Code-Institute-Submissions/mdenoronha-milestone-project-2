@@ -153,9 +153,9 @@ The process for deployment was as follows:
 
 Credits
 ---------------
-* Assistance from [anon](https://www.w3schools.com/howto/howto_css_modals.asp) for modal usage
+* Assistance from [here](https://www.w3schools.com/howto/howto_css_modals.asp) for modal usage
 * Assistance from [Jack Rugile](https://codepen.io/jackrugile/pen/ABeIi) for CSS glow effect
-* Assistance from [anon](https://www.htmlgoodies.com/beyond/javascript/js-ref/testing-dom-events-using-jquery-and-jasmine-2.0.html) for Jasmine-jQuery usage and installation
+* Assistance from [here](https://www.htmlgoodies.com/beyond/javascript/js-ref/testing-dom-events-using-jquery-and-jasmine-2.0.html) for Jasmine-jQuery usage and installation
 
 Credits
 ---------------
